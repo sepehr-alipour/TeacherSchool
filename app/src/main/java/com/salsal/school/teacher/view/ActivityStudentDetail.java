@@ -6,5 +6,5 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Sepehr on 12/4/2017.
  */
 
-public class ActivityStudentDetail extends AppCompatActivity {
+public class ActivityStudentDetail extends BaseActivity {
 }

@@ -15,7 +15,7 @@ import com.salsal.school.teacher.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ActivityMain extends AppCompatActivity implements View.OnClickListener,
+public class ActivityMain extends BaseActivity implements View.OnClickListener,
         FragmentProfile.OnFragmentInteractionListener,
         FragmentStudents.OnFragmentInteractionListener,
         FragmentNotifications.OnFragmentInteractionListener,

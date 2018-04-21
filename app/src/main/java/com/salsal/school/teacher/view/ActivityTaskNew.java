@@ -6,5 +6,5 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Sepehr on 12/4/2017.
  */
 
-public class ActivityTaskNew extends AppCompatActivity {
+public class ActivityTaskNew extends BaseActivity {
 }

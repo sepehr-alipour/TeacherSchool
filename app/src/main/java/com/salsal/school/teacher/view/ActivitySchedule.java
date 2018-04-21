@@ -6,5 +6,5 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Sepehr on 12/4/2017.
  */
 
-public class ActivitySchedule extends AppCompatActivity {
+public class ActivitySchedule extends BaseActivity {
 }

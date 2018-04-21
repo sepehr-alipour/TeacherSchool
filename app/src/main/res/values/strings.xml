@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">مدرسه (معلم)</string>
+    <string name="app_name">مدرسه من (معلم)</string>
     <string name="failed_server">failed</string>
     <string name="btn_login">ورود</string>
     <string name="hint_username">نام کاربری</string>
@@ -7,7 +7,7 @@
     <string name="tab_profile">پروفایل</string>
     <string name="tab_students">دانش آموزان</string>
     <string name="tab_notifications">اعلانات</string>
-
+    <string name="toast_empty_edittext">لطفا نام کاربری و رمز عبور خود را وارد کنید</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">profile</string>
 </resources>

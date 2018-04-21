@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:title="@string/app_name"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"/>
+        android:scaleType="centerInside"
+        android:src="@drawable/logo"/>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/usernameWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right">
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/edtUsername"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:gravity="right"
-            android:hint="@string/hint_username"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edtUsername"
+        style="@style/EditTextStyle"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:gravity="right|center"
+        android:hint="@string/hint_username"
+        android:inputType="text"
+        android:paddingTop="50dp"
+        />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/passwordWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/edtPassword"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:gravity="right"
-            android:hint="@string/hint_password"
-            android:inputType="textPassword"/>
-    </android.support.design.widget.TextInputLayout>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edtPassword"
+        style="@style/EditTextStyle"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnLogin"
         style="@style/Base.Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_login"/>
+        android:background="@drawable/border_shape_blue"
+        android:text="@string/btn_login"
+        android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>
