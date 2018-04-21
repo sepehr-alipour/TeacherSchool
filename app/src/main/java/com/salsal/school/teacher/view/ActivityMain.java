@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.View;
 
@@ -23,7 +23,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener,
 
 {
 
-    @BindView (R.id.bottom_navigation)
+    @BindView(R.id.bottom_navigation)
     AHBottomNavigation bottomNavigation;
 
     private final int TAB_PROFILE = 0;
@@ -42,11 +42,12 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_profile, R.drawable.ic_action_profile, R.color.gray_btn);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_students, R.drawable.ic_action_student, R.color.gray_btn);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_notifications, R.drawable.ic_action_notification, R.color.gray_btn);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_profile, R.drawable.ic_action_profile, R.color.colorPrimary);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_students, R.drawable.ic_action_student, R.color.colorPrimary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_notifications, R.drawable.ic_action_notification, R.color.colorPrimary);
 
 // Add items
+        bottomNavigation.setAccentColor(ContextCompat.getColor(this,R.color.colorPrimary));
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
         bottomNavigation.addItem(item3);
@@ -68,8 +69,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener,
     @Override
     public boolean onTabSelected(int position, boolean wasSelected) {
         Fragment selectedFragment = null;
-        switch (position)
-        {
+        switch (position) {
             case TAB_PROFILE:
                 selectedFragment = FragmentProfile.newInstance("", "");
                 break;
