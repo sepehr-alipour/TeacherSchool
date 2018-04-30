@@ -1,5 +1,6 @@
 package com.salsal.school.teacher.interfaces;
 
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
 import java.util.Map;
@@ -28,72 +29,71 @@ public interface ApiInterface {
 
     String PRE_URL = "webservice";
 
-    @POST (PRE_URL + "/login")
-    Call<JsonObject> loginUser(@Header ("username") String username, @Header ("password") String password);
+    @POST(PRE_URL + "/login")
+    Call<JsonObject> loginUser(@Header("username") String username, @Header("password") String password);
 
-    @POST (PRE_URL + "/logout")
-    Call<JsonObject> logoutUser(@Header ("token") String token);
+    @GET(PRE_URL + "/teacher")
+    Call<JsonObject> getProfile(@Field("user_id") String userId);
 
-    @POST (PRE_URL + "/getevents")
+    @POST(PRE_URL + "/teacher")
+    Call<JsonObject> updateProfile(@Field("user_id") String userId);
+
+    Call<JsonObject> getEvents(@Header("token") String token,
+                               @Field("page") int page,
+                               @Field("perpage") int perPage);
+
+    @POST(PRE_URL + "/getdelegates")
     @FormUrlEncoded
-    Call<JsonObject> getEvents(@Header ("token") String token,
-                               @Field ("page") int page,
-                               @Field ("perpage") int perPage);
+    Call<JsonObject> getDelegates(@Header("token") String token,
+                                  @Field("event_id") String eventId,
+                                  @Field("page") int pageNumber,
+                                  @Field("perpage") int perPage);
 
-    @POST (PRE_URL + "/getdelegates")
+    @POST(PRE_URL + "/searchdelegate")
     @FormUrlEncoded
-    Call<JsonObject> getDelegates(@Header ("token") String token,
-                                  @Field ("event_id") String eventId,
-                                  @Field ("page") int pageNumber,
-                                  @Field ("perpage") int perPage);
+    Call<JsonObject> searchDelegate(@Header("token") String token,
+                                    @Field("search") String query,
+                                    @Field("event_id") String eventId,
+                                    @Field("page") int pagenumber,
+                                    @Field("perpage") int perPage);
 
-    @POST (PRE_URL + "/searchdelegate")
+    @POST(PRE_URL + "/getagendas")
     @FormUrlEncoded
-    Call<JsonObject> searchDelegate(@Header ("token") String token,
-                                    @Field ("search") String query,
-                                    @Field ("event_id") String eventId,
-                                    @Field ("page") int pagenumber,
-                                    @Field ("perpage") int perPage);
+    Call<JsonObject> getAgendas(@Header("token") String token,
+                                @Field("event_id") String eventId,
+                                @Field("page") int pageNumber,
+                                @Field("perpage") int perPage);
 
-    @POST (PRE_URL + "/getagendas")
+    @POST(PRE_URL + "/getevent")
     @FormUrlEncoded
-    Call<JsonObject> getAgendas(@Header ("token") String token,
-                                @Field ("event_id") String eventId,
-                                @Field ("page") int pageNumber,
-                                @Field ("perpage") int perPage);
+    Call<JsonObject> getEvent(@Header("token") String token,
+                              @Field("event_id") String eventId);
 
-    @POST (PRE_URL + "/getevent")
+    @POST(PRE_URL + "/getmessages")
     @FormUrlEncoded
-    Call<JsonObject> getEvent(@Header ("token") String token,
-                              @Field ("event_id") String eventId);
+    Call<JsonObject> getMessages(@Field("page") int pageNumber,
+                                 @Header("token") String uid,
+                                 @Field("perpage") int perPage);
 
-    @POST (PRE_URL + "/getmessages")
+
+    @POST(PRE_URL + "/setbookmark")
     @FormUrlEncoded
-    Call<JsonObject> getMessages(@Field ("page") int pageNumber,
-                                 @Header ("token") String uid,
-                                 @Field ("perpage") int perPage);
+    Call<JsonObject> setBookmark(@Header("token") String uid,
+                                 @Field("id") String eventId,
+                                 @Field("type") int type);
 
-    @POST (PRE_URL + "/getprofile")
-    Call<JsonObject> getProfile(@Header ("token") String uid);
-
-    @POST (PRE_URL + "/setbookmark")
+    @POST(PRE_URL + "/resetpassword")
     @FormUrlEncoded
-    Call<JsonObject> setBookmark(@Header ("token") String uid,
-                                 @Field ("id") String eventId,
-                                 @Field ("type") int type);
-
-    @POST (PRE_URL + "/resetpassword")
-    @FormUrlEncoded
-    Call<JsonObject> resetPassword(@Field ("username") String userName);
+    Call<JsonObject> resetPassword(@Field("username") String userName);
 
     @Multipart
-    @POST (PRE_URL + "/updateprofile")
-    Call<JsonObject> updateProfile(@Header ("token") String token,
-                                   @PartMap () Map<String, RequestBody> partMap,
+    @POST(PRE_URL + "/updateprofile")
+    Call<JsonObject> updateProfile(@Header("token") String token,
+                                   @PartMap() Map<String, RequestBody> partMap,
                                    @Part MultipartBody.Part file);
 
-    @GET (PRE_URL)
-    @Headers ({"Accept: application/json", "Content-Type: application/json"})
-    Call<JsonObject> getGoogleRouts(@Query ("origin") String source, @Query ("destination") String destination, @Query ("key") String apikey);
+    @GET(PRE_URL)
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    Call<JsonObject> getGoogleRouts(@Query("origin") String source, @Query("destination") String destination, @Query("key") String apikey);
 
 }
