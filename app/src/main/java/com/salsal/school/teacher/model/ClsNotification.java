@@ -11,6 +11,15 @@ public class ClsNotification {
     private String description;
     private ClsNotificationCat notificationCat;
     private String date;
+    private String sender;
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
 
     public int getId() {
         return id;

@@ -1,8 +1,8 @@
 package com.salsal.school.teacher.view;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,23 +12,20 @@ import android.view.ViewGroup;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterNofits;
+import com.salsal.school.teacher.interfaces.OnNotifClickListener;
+import com.salsal.school.teacher.model.ClsNotification;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentNotifications#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentNotifications extends Fragment {
+public class FragmentNotifications extends Fragment implements OnNotifClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,26 +33,18 @@ public class FragmentNotifications extends Fragment {
     @BindView(R.id.notifList)
     RecyclerView notifList;
     Unbinder unbinder;
+    @BindView(R.id.fabAddNotif)
+    FloatingActionButton fabAddNotif;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
 
     public FragmentNotifications() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentProfile.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FragmentNotifications newInstance(String param1, String param2) {
         FragmentNotifications fragment = new FragmentNotifications();
         Bundle args = new Bundle();
@@ -81,36 +70,35 @@ public class FragmentNotifications extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
         unbinder = ButterKnife.bind(this, view);
         notifList.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<String> list = new ArrayList<>();
+        notifList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0)
+                    fabAddNotif.hide();
+                else if (dy < 0)
+                    fabAddNotif.show();
+            }
+        });
+        List<ClsNotification> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add(i + "");
+            ClsNotification clsNotification = new ClsNotification();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm", Locale.US);
+            String date = simpleDateFormat.format(new Date());
+            clsNotification.setId(i);
+            clsNotification.setDate(date.toString());
+            clsNotification.setDescription("تست پیام" + i);
+            clsNotification.setSender("مجید باقری");
+            clsNotification.setTitle("عنوان تست" + i);
+            list.add(clsNotification);
         }
-        notifList.setAdapter(new AdapterNofits(list));
+        notifList.setAdapter(new AdapterNofits(list, this));
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -119,18 +107,10 @@ public class FragmentNotifications extends Fragment {
         unbinder.unbind();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void clicked(ClsNotification notification) {
+        Intent intent = new Intent(getContext(), ActivityNotifDetail.class);
+        intent.putExtra("notifId", notification.getId());
+        startActivity(intent);
     }
 }

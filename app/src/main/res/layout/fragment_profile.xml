@@ -33,6 +33,7 @@
                     app:civ_border_width="2dp" />
 
                 <TextView
+                    android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/profile_image"
@@ -72,6 +73,7 @@
                         android:background="@color/gray_divider" />
 
                     <TextView
+                        android:id="@+id/txtEducation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -95,6 +97,7 @@
                         android:background="@color/gray_divider" />
 
                     <TextView
+                        android:id="@+id/txtBirthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -119,6 +122,7 @@
                         android:background="@color/gray_divider" />
 
                     <TextView
+                        android:id="@+id/txtEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -143,6 +147,7 @@
                         android:background="@color/gray_divider" />
 
                     <TextView
+                        android:id="@+id/txtMobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -167,6 +172,7 @@
                         android:background="@color/gray_divider" />
 
                     <TextView
+                        android:id="@+id/txtNationalCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -192,6 +198,7 @@
                         android:background="@color/gray_divider" />
 
                     <android.support.v7.widget.AppCompatRatingBar
+                        android:id="@+id/ratingBar"
                         style="@style/Base.Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -3,6 +3,8 @@ package com.salsal.school.teacher.webservice;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.HashMap;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -10,8 +12,11 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class ValueKeeper {
     private static ValueKeeper ourInstance = new ValueKeeper();
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = "http://192.168.43.114:80";
     public static final int PER_PAGE = 10;
+    private static final String PRE_USER_PROFILE = "user_profile";
+    public static final String PREF_TOKEN = "token";
+    public static final String PREF_ID = "id";
 
     public static ValueKeeper getInstance() {
         return ourInstance;
@@ -21,30 +26,23 @@ public class ValueKeeper {
     }
 
 
-    public static void saveToken(Context context, String token) {
-        SharedPreferences.Editor editor = context.getSharedPreferences("userProfile", MODE_PRIVATE).edit();
-        // editor.putString("username", username);
-        //  editor.putString("password", password);
-        editor.putString("token", token);
-        editor.commit();
+    public static void SaveUserProfile(Context context, String id, String token) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE).edit();
+        editor.putString(PREF_TOKEN, token);
+        editor.putString(PREF_ID, id);
+        editor.apply();
     }
 
-    public static String getToken(Context context) {
-        // HashMap hashMap = null;
-        SharedPreferences prefs = context.getSharedPreferences("userProfile", MODE_PRIVATE);
-        if (prefs.contains("token"))
-        {
-            //  hashMap = new HashMap();
-            // hashMap.put("username", prefs.getString("username", ""));
-            // hashMap.put("password", prefs.getString("password", ""));
-            // hashMap.put("token", prefs.getString("token", ""));
-            return prefs.getString("token", "");
-        }
-        return null;
+    public static HashMap<String, String> getUserProfile(Context context) {
+        HashMap<String, String> profile = new HashMap<>();
+        SharedPreferences prefs = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE);
+        profile.put(PREF_ID, prefs.getString(PREF_ID, ""));
+        profile.put(PREF_TOKEN, prefs.getString(PREF_TOKEN, ""));
+        return profile;
     }
 
     public static void removeAllPrefrences(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("userProfile", Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(PRE_USER_PROFILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.commit();

@@ -2,12 +2,16 @@ package com.salsal.school.teacher.interfaces;
 
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import com.salsal.school.teacher.model.LoginReq;
+import com.salsal.school.teacher.model.LoginResponse;
+import com.salsal.school.teacher.model.TeacherProfileResponce;
 
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -17,6 +21,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -27,16 +32,18 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
 
-    String PRE_URL = "webservice";
+    // String PRE_URL = "api.salsal.local";
+    String PRE_URL = "192.168.43.114:80";
+    String URL_V1 = "/api/v1";
 
-    @POST(PRE_URL + "/login")
-    Call<JsonObject> loginUser(@Header("username") String username, @Header("password") String password);
+    @POST(URL_V1 + "/user/signin")
+    Call<LoginResponse> loginUser(@Body LoginReq req);
 
-    @GET(PRE_URL + "/teacher")
-    Call<JsonObject> getProfile(@Field("user_id") String userId);
+    @GET(URL_V1 + "/teacherProfile/{id}")
+    Call<TeacherProfileResponce> getTeacherProfile(@Path("id") String id, @Query("token") String token);
 
     @POST(PRE_URL + "/teacher")
-    Call<JsonObject> updateProfile(@Field("user_id") String userId);
+    Call<JsonObject> updateProfile(@Query("user_id") String userId);
 
     Call<JsonObject> getEvents(@Header("token") String token,
                                @Field("page") int page,

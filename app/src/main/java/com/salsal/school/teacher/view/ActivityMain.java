@@ -17,9 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ActivityMain extends BaseActivity implements View.OnClickListener,
-        FragmentProfile.OnFragmentInteractionListener,
-        FragmentStudents.OnFragmentInteractionListener,
-        FragmentNotifications.OnFragmentInteractionListener,
         AHBottomNavigation.OnTabSelectedListener
 
 {
@@ -62,12 +59,6 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onClick(View view) {
-
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
 
     }
 
