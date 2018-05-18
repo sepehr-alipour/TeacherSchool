@@ -12,8 +12,12 @@ import android.view.ViewGroup;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterNofits;
+import com.salsal.school.teacher.interfaces.APIErrorResult;
+import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnNotifClickListener;
 import com.salsal.school.teacher.model.ClsNotification;
+import com.salsal.school.teacher.webservice.ValueKeeper;
+import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +28,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.Response;
 
 public class FragmentNotifications extends Fragment implements OnNotifClickListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -85,19 +90,19 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
                     fabAddNotif.show();
             }
         });
-        List<ClsNotification> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ClsNotification clsNotification = new ClsNotification();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm", Locale.US);
-            String date = simpleDateFormat.format(new Date());
-            clsNotification.setId(i);
-            clsNotification.setDate(date.toString());
-            clsNotification.setDescription("تست پیام" + i);
-            clsNotification.setSender("مجید باقری");
-            clsNotification.setTitle("عنوان تست" + i);
-            list.add(clsNotification);
-        }
-        notifList.setAdapter(new AdapterNofits(list, this));
+        WebServiceHelper.get(getContext()).getNotifications(ValueKeeper.getUserProfile(getContext()).get(ValueKeeper.PREF_TOKEN))
+                .enqueue(new CallbackHandler<ClsNotification>(getContext(), true, true) {
+                    @Override
+                    public void onSuccess(Response<ClsNotification> response) {
+                        notifList.setAdapter(new AdapterNofits(response.body().getData(), FragmentNotifications.this));
+                    }
+
+                    @Override
+                    public void onFailed(APIErrorResult errorResult) {
+
+                    }
+                });
+
         return view;
     }
 
@@ -108,7 +113,7 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
     }
 
     @Override
-    public void clicked(ClsNotification notification) {
+    public void clicked(ClsNotification.DataBean notification) {
         Intent intent = new Intent(getContext(), ActivityNotifDetail.class);
         intent.putExtra("notifId", notification.getId());
         startActivity(intent);

@@ -3,7 +3,7 @@
     package="com.salsal.school.teacher">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".ApplicationClass"
@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ActivityMain"></activity>
+        <activity android:name=".view.ActivityMain" />
         <activity
             android:name=".view.ActivityLogin"
             android:windowSoftInputMode="adjustPan">
@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ActivityNotifDetail"></activity>
+        <activity android:name=".view.ActivityNotifDetail" />
+        <activity android:name=".view.ActivityNotificationNew" />
     </application>
 
 </manifest>

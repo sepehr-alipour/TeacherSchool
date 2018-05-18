@@ -19,10 +19,10 @@ import butterknife.ButterKnife;
 
 public class AdapterNofits extends RecyclerView.Adapter<AdapterNofits.ViewHolder> {
 
-    private final List<ClsNotification> listNotif;
+    private final List<ClsNotification.DataBean> listNotif;
     private OnNotifClickListener notifClickListener;
 
-    public AdapterNofits(List<ClsNotification> notifs, OnNotifClickListener listener) {
+    public AdapterNofits(List<ClsNotification.DataBean> notifs, OnNotifClickListener listener) {
         listNotif = notifs;
         notifClickListener = listener;
     }
@@ -37,12 +37,12 @@ public class AdapterNofits extends RecyclerView.Adapter<AdapterNofits.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final ClsNotification itemList = listNotif.get(position);
-        holder.txtDate.setText(itemList.getDate());
-        holder.txtDesc.setText(itemList.getDescription());
-        holder.txtSender.setText(itemList.getSender());
+        final ClsNotification.DataBean itemList = listNotif.get(position);
+        holder.txtDate.setText(itemList.getCreatedAt());
+        holder.txtDesc.setText(itemList.getMessage());
+        holder.txtSender.setText(itemList.getId() + "");
         holder.txtTitle.setText(itemList.getTitle());
-        holder.txtType.setText("عمومی");
+        holder.txtType.setText(itemList.getType()+"");
         holder.notifLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

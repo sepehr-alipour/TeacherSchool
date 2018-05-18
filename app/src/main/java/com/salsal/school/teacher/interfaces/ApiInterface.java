@@ -1,11 +1,15 @@
 package com.salsal.school.teacher.interfaces;
 
+import android.app.Notification;
+
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import com.salsal.school.teacher.model.ClsNotification;
 import com.salsal.school.teacher.model.LoginReq;
 import com.salsal.school.teacher.model.LoginResponse;
 import com.salsal.school.teacher.model.TeacherProfileResponce;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -45,9 +49,8 @@ public interface ApiInterface {
     @POST(PRE_URL + "/teacher")
     Call<JsonObject> updateProfile(@Query("user_id") String userId);
 
-    Call<JsonObject> getEvents(@Header("token") String token,
-                               @Field("page") int page,
-                               @Field("perpage") int perPage);
+    @GET(URL_V1 + "/notification")
+    Call<ClsNotification> getNotifications(@Query("token") String token);
 
     @POST(PRE_URL + "/getdelegates")
     @FormUrlEncoded

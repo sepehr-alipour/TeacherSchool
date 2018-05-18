@@ -4,5 +4,5 @@ import com.salsal.school.teacher.model.ClsNotification;
 
 public interface OnNotifClickListener {
 
-    void clicked(ClsNotification notification);
+    void clicked(ClsNotification.DataBean notification);
 }
