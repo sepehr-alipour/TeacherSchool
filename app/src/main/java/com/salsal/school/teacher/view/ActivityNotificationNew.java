@@ -11,13 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterReceiverMessage;
 import com.salsal.school.teacher.interfaces.OnReceiverClickListener;
 import com.salsal.school.teacher.model.ReceiverMessageItem;
-import com.salsal.school.teacher.model.ResClass;
+import com.salsal.school.teacher.model.ClassRes;
+import com.salsal.school.teacher.model.StudentRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,21 +95,30 @@ public class ActivityNotificationNew extends BaseActivity implements View.OnClic
     }
 
     @Override
-    public void clicked(ReceiverMessageItem receiverMessageItem) {
-        switch (receiverMessageItem.getRecipientType()) {
-            case ReceiverMessageItem.UNIT:
+    public void clicked(ReceiverMessageItem receiverMessageItem, int pos) {
+        switch (pos) {
+            case 0:
 
                 break;
-            case ReceiverMessageItem.PARENT:
+            case 1:
+                BottomSheetFragmentStudents bottomSheetFragmentStudents = new BottomSheetFragmentStudents(BottomSheetFragmentStudents.TYPE_CLASSES, true);
+                bottomSheetFragmentStudents.show(getSupportFragmentManager(), "students");
+                break;
+            case 2:
+                BottomSheetFragmentStudents bottomSheetFragmentClasses = new BottomSheetFragmentStudents(BottomSheetFragmentStudents.TYPE_CLASSES, false);
+                bottomSheetFragmentClasses.show(getSupportFragmentManager(), "classes");
 
-                BottomSheetFragmentStudents bottomSheetFragmentStudents = new BottomSheetFragmentStudents();
-                bottomSheetFragmentStudents.show(getSupportFragmentManager(), "sutdents");
                 break;
         }
     }
 
     @Override
-    public void clicked(ResClass resClass) {
+    public void clicked(ClassRes resClass, int pos) {
+
+    }
+
+    @Override
+    public void clicked(StudentRes studentRes, int pos) {
 
     }
 }

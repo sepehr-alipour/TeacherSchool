@@ -1,10 +1,10 @@
 package com.salsal.school.teacher.model;
 
-public class ResClass {
+public class ClassRes {
     String name;
     int calssId;
 
-    public ResClass(String name, int calssId) {
+    public ClassRes(String name, int calssId) {
         this.name = name;
         this.calssId = calssId;
     }

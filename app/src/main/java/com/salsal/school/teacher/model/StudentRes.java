@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Sepehr on 12/4/2017.
  */
 
-public class ClsStudent {
+public class StudentRes {
     private int id;
     private String name;
     private String age;

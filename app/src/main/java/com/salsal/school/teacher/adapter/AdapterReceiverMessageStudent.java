@@ -1,29 +1,33 @@
 package com.salsal.school.teacher.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.interfaces.OnReceiverClickListener;
-import com.salsal.school.teacher.model.ReceiverMessageItem;
+import com.salsal.school.teacher.model.StudentRes;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AdapterReceiverMessage extends RecyclerView.Adapter<AdapterReceiverMessage.ViewHolder> {
+public class AdapterReceiverMessageStudent extends RecyclerView.Adapter<AdapterReceiverMessageStudent.ViewHolder> {
     private final OnReceiverClickListener clickListener;
-    List<ReceiverMessageItem> messageItems;
+    List<StudentRes> messageItems;
     @BindView(R.id.rootItemw)
     LinearLayout rootItemw;
+    private SparseBooleanArray itemStateArray = new SparseBooleanArray();
 
-    public AdapterReceiverMessage(List<ReceiverMessageItem> messageItems, OnReceiverClickListener listener) {
+    public AdapterReceiverMessageStudent(List<StudentRes> messageItems, OnReceiverClickListener listener) {
         this.messageItems = messageItems;
         this.clickListener = listener;
     }
@@ -38,8 +42,12 @@ public class AdapterReceiverMessage extends RecyclerView.Adapter<AdapterReceiver
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final ReceiverMessageItem messageItem = messageItems.get(position);
+        final StudentRes messageItem = messageItems.get(position);
         holder.txtTitle.setText(messageItem.getName());
+        holder.imgIcon.setImageResource(R.drawable.ic_action_student);
+        holder.chkItem.setVisibility(View.VISIBLE);
+        holder.bind(position);
+       
     }
 
 
@@ -59,6 +67,11 @@ public class AdapterReceiverMessage extends RecyclerView.Adapter<AdapterReceiver
         @BindView(R.id.rootItemw)
         LinearLayout rootView;
 
+        @BindView(R.id.imgIcon)
+        ImageView imgIcon;
+
+        @BindView(R.id.chkItem)
+        AppCompatCheckBox chkItem;
 
         public ViewHolder(View itemView) {
 
@@ -68,10 +81,26 @@ public class AdapterReceiverMessage extends RecyclerView.Adapter<AdapterReceiver
 
         }
 
+        void bind(int position) {
+            // use the sparse boolean array to check
+            if (!itemStateArray.get(position, false)) {
+                chkItem.setChecked(false);
+            } else {
+                chkItem.setChecked(true);
+            }
+        }
+
         @Override
         public void onClick(View view) {
-            clickListener.clicked(messageItems.get(getAdapterPosition()), getAdapterPosition());
-
+            int adapterPosition = getAdapterPosition();
+            if (!itemStateArray.get(adapterPosition, false)) {
+                chkItem.setChecked(true);
+                itemStateArray.put(adapterPosition, true);
+            } else {
+                chkItem.setChecked(false);
+                itemStateArray.put(adapterPosition, false);
+            }
         }
+
     }
 }

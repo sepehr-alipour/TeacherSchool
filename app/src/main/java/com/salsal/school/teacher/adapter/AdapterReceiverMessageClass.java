@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.interfaces.OnReceiverClickListener;
-import com.salsal.school.teacher.model.ResClass;
+import com.salsal.school.teacher.model.ClassRes;
+import com.salsal.school.teacher.model.StudentRes;
 
 import java.util.List;
 
@@ -20,11 +21,11 @@ import butterknife.ButterKnife;
 
 public class AdapterReceiverMessageClass extends RecyclerView.Adapter<AdapterReceiverMessageClass.ViewHolder> {
     private final OnReceiverClickListener clickListener;
-    List<ResClass> messageItems;
+    List<ClassRes> messageItems;
     @BindView(R.id.rootItemw)
     LinearLayout rootItemw;
 
-    public AdapterReceiverMessageClass(List<ResClass> messageItems, OnReceiverClickListener listener) {
+    public AdapterReceiverMessageClass(List<ClassRes> messageItems, OnReceiverClickListener listener) {
         this.messageItems = messageItems;
         this.clickListener = listener;
     }
@@ -38,16 +39,10 @@ public class AdapterReceiverMessageClass extends RecyclerView.Adapter<AdapterRec
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final ResClass messageItem = messageItems.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final ClassRes messageItem = messageItems.get(position);
         holder.txtTitle.setText(messageItem.getName());
         holder.imgIcon.setImageResource(R.drawable.ic_action_class);
-        holder.rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickListener.clicked(messageItem);
-            }
-        });
     }
 
 
@@ -57,7 +52,7 @@ public class AdapterReceiverMessageClass extends RecyclerView.Adapter<AdapterRec
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 
     {
 
@@ -74,6 +69,13 @@ public class AdapterReceiverMessageClass extends RecyclerView.Adapter<AdapterRec
 
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.clicked(messageItems.get(getAdapterPosition()), getAdapterPosition());
 
         }
     }
