@@ -19,18 +19,12 @@ import com.salsal.school.teacher.model.ClsNotification;
 import com.salsal.school.teacher.webservice.ValueKeeper;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import retrofit2.Response;
 
-public class FragmentNotifications extends Fragment implements OnNotifClickListener {
+public class FragmentNotifications extends Fragment implements OnNotifClickListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,6 +68,7 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
         unbinder = ButterKnife.bind(this, view);
+        fabAddNotif.setOnClickListener(this);
         notifList.setLayoutManager(new LinearLayoutManager(getContext()));
         notifList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -117,5 +112,18 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
         Intent intent = new Intent(getContext(), ActivityNotifDetail.class);
         intent.putExtra("notifId", notification.getId());
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+
+
+            case R.id.fabAddNotif:
+
+                startActivity(new Intent(getContext(), ActivityNotificationNew.class));
+                break;
+        }
     }
 }
