@@ -21,11 +21,11 @@ import butterknife.ButterKnife;
 
 public class AdapterReceiverMessageClass extends RecyclerView.Adapter<AdapterReceiverMessageClass.ViewHolder> {
     private final OnReceiverClickListener clickListener;
-    List<ClassRes> messageItems;
+    List<ClassRes.DataBean> messageItems;
     @BindView(R.id.rootItemw)
     LinearLayout rootItemw;
 
-    public AdapterReceiverMessageClass(List<ClassRes> messageItems, OnReceiverClickListener listener) {
+    public AdapterReceiverMessageClass(List<ClassRes.DataBean> messageItems, OnReceiverClickListener listener) {
         this.messageItems = messageItems;
         this.clickListener = listener;
     }
@@ -40,8 +40,8 @@ public class AdapterReceiverMessageClass extends RecyclerView.Adapter<AdapterRec
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final ClassRes messageItem = messageItems.get(position);
-        holder.txtTitle.setText(messageItem.getName());
+        final ClassRes.DataBean messageItem = messageItems.get(position);
+        holder.txtTitle.setText(messageItem.getTitle());
         holder.imgIcon.setImageResource(R.drawable.ic_action_class);
     }
 

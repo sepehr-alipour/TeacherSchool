@@ -9,9 +9,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.salsal.school.teacher.R;
+import com.salsal.school.teacher.interfaces.APIErrorResult;
+import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.model.NotificationDetailRes;
+import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Response;
 
 public class ActivityNotifDetail extends BaseActivity {
 
@@ -34,12 +40,30 @@ public class ActivityNotifDetail extends BaseActivity {
     @BindView(R.id.btnSend)
     AppCompatButton btnSend;
     private int notifId;
+    public static final String INTENT_NOTIF_ID = "notif_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notif_detail);
         ButterKnife.bind(this);
-        notifId = getIntent().getIntExtra("notifId", 0);
+        notifId = getIntent().getIntExtra(INTENT_NOTIF_ID, 0);
+
+        WebServiceHelper.get(this).getNotificationDetails(notifId, PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_TOKEN))
+                .enqueue(new CallbackHandler<NotificationDetailRes>(this, true, true) {
+                    @Override
+                    public void onSuccess(Response<NotificationDetailRes> response) {
+                        txtDate.setText(response.body().getData().getCreatedAt());
+                        txtDesc.setText(response.body().getData().getMessage());
+                        txtSender.setText(response.body().getData().getId()+"");
+                        txtTitle.setText(response.body().getData().getTitle());
+                        txtType.setText(response.body().getData().getType()+"");
+                    }
+
+                    @Override
+                    public void onFailed(APIErrorResult errorResult) {
+
+                    }
+                });
     }
 }

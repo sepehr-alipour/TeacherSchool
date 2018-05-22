@@ -3,7 +3,6 @@
     android:id="@+id/rootItemw"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/space_10_dp"
@@ -13,12 +12,13 @@
         android:id="@+id/chkItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:visibility="gone" />
 
     <ImageView
         android:id="@+id/imgIcon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_margin="@dimen/space_5_dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_action_send" />
@@ -27,10 +27,12 @@
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="0dp"
+        android:gravity="right"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginRight="@dimen/space_10_dp"
         android:layout_weight="1"
+        android:textSize="16sp"
         android:text="نمونه" />
 
 </LinearLayout>

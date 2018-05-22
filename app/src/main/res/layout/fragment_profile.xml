@@ -77,8 +77,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:gravity="right"
                         android:paddingRight="10dp"
-                        android:text="کارشناسی"
+                        android:text="---"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
@@ -103,7 +104,7 @@
                         android:layout_marginTop="10dp"
                         android:gravity="right"
                         android:paddingRight="10dp"
-                        android:text="12/07/97"
+                        android:text="--/--/--"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
@@ -128,7 +129,7 @@
                         android:layout_marginTop="10dp"
                         android:gravity="right"
                         android:paddingRight="10dp"
-                        android:text="email@gmail.com"
+                        android:text="---"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView

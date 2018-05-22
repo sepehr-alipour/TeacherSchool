@@ -2,24 +2,18 @@ package com.salsal.school.teacher.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-/**
- * Created by Sepehr on 12/4/2017.
- */
-
-public class ClsNotification {
+public class NotificationDetailRes {
 
 
     /**
      * msg : ok
-     * data : [{"id":1,"title":"new notif","message":"متن اعلان","type":1,"file_url":"link","created_at":"2018-05-17 15:14:42","updated_at":"2018-05-17 15:14:42","pivot":{"user_id":1,"notification_id":1,"created_at":"2018-05-17 15:14:42","updated_at":"2018-05-17 15:14:42"}}]
+     * data : {"title":"عنوان asdاعل2ان","message":"متن اعلان","type":1,"file_url":"link","updated_at":"2018-05-22 05:08:15","created_at":"2018-05-22 05:08:15","id":2}
      */
 
     @SerializedName("msg")
     private String msg;
     @SerializedName("data")
-    private List<DataBean> data;
+    private DataBean data;
 
     public String getMsg() {
         return msg;
@@ -29,28 +23,25 @@ public class ClsNotification {
         this.msg = msg;
     }
 
-    public List<DataBean> getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
     public static class DataBean {
         /**
-         * id : 1
-         * title : new notif
+         * title : عنوان asdاعل2ان
          * message : متن اعلان
          * type : 1
          * file_url : link
-         * created_at : 2018-05-17 15:14:42
-         * updated_at : 2018-05-17 15:14:42
-         * pivot : {"user_id":1,"notification_id":1,"created_at":"2018-05-17 15:14:42","updated_at":"2018-05-17 15:14:42"}
+         * updated_at : 2018-05-22 05:08:15
+         * created_at : 2018-05-22 05:08:15
+         * id : 2
          */
 
-        @SerializedName("id")
-        private int id;
         @SerializedName("title")
         private String title;
         @SerializedName("message")
@@ -59,19 +50,12 @@ public class ClsNotification {
         private int type;
         @SerializedName("file_url")
         private String fileUrl;
-        @SerializedName("created_at")
-        private String createdAt;
         @SerializedName("updated_at")
         private String updatedAt;
-
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
+        @SerializedName("created_at")
+        private String createdAt;
+        @SerializedName("id")
+        private int id;
 
         public String getTitle() {
             return title;
@@ -105,14 +89,6 @@ public class ClsNotification {
             this.fileUrl = fileUrl;
         }
 
-        public String getCreatedAt() {
-            return createdAt;
-        }
-
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
-        }
-
         public String getUpdatedAt() {
             return updatedAt;
         }
@@ -121,5 +97,20 @@ public class ClsNotification {
             this.updatedAt = updatedAt;
         }
 
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
     }
 }

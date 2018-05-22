@@ -16,7 +16,7 @@ import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.interfaces.APIErrorResult;
 import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.model.TeacherProfileResponce;
-import com.salsal.school.teacher.webservice.ValueKeeper;
+import com.salsal.school.teacher.utils.PreferenceManager;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
@@ -91,8 +91,8 @@ public class FragmentProfile extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        WebServiceHelper.get(getContext()).getTeacherProfile(ValueKeeper.getUserProfile(getContext()).get(ValueKeeper.PREF_ID)
-                , ValueKeeper.getUserProfile(getContext()).get(ValueKeeper.PREF_TOKEN))
+        WebServiceHelper.get(getContext()).getTeacherProfile(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_ID)
+                , PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
                 .enqueue(new CallbackHandler<TeacherProfileResponce>(getContext(), true, true) {
                     @Override
                     public void onSuccess(Response<TeacherProfileResponce> response) {

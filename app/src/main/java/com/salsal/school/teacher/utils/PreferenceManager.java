@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.webservice;
+package com.salsal.school.teacher.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,21 +10,23 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by Taraabar on 12/28/2016.
  */
-public class ValueKeeper {
-    private static ValueKeeper ourInstance = new ValueKeeper();
-    public static final String BASE_URL = "http://192.168.2.119:80";
-    //public static final String BASE_URL = "http://192.168.1.12:80";
+public class PreferenceManager {
+    private static PreferenceManager ourInstance = new PreferenceManager();
+    //public static final String BASE_URL = "http://192.168.2.119:80";
+    public static final String BASE_URL = "http://192.168.1.12:80";
     //public static final String BASE_URL = "http://192.168.43.114:80";
     public static final int PER_PAGE = 10;
     private static final String PRE_USER_PROFILE = "user_profile";
     public static final String PREF_TOKEN = "token";
     public static final String PREF_ID = "id";
+    public static final String PREF_COURSE_ID = "course_id";
+    public static final String PREF_CLASS_ID = "class_id";
 
-    public static ValueKeeper getInstance() {
+    public static PreferenceManager getInstance() {
         return ourInstance;
     }
 
-    private ValueKeeper() {
+    private PreferenceManager() {
     }
 
 
@@ -34,6 +36,29 @@ public class ValueKeeper {
         editor.putString(PREF_ID, id);
         editor.apply();
     }
+
+    public static void saveTeacherCourse(Context context, int teacherCource) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE).edit();
+        editor.putInt(PREF_COURSE_ID, teacherCource);
+        editor.apply();
+    }
+
+    public static void saveTeacherClass(Context context, int teacherClass) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE).edit();
+        editor.putInt(PREF_CLASS_ID, teacherClass);
+        editor.apply();
+    }
+
+    public static int getTeacherClassId(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE);
+        return prefs.getInt(PREF_CLASS_ID, -1);
+    }
+
+    public static int getTeacherCourseId(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE);
+        return prefs.getInt(PREF_COURSE_ID, -1);
+    }
+
 
     public static HashMap<String, String> getUserProfile(Context context) {
         HashMap<String, String> profile = new HashMap<>();

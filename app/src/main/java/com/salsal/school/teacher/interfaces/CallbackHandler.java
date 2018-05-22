@@ -1,11 +1,13 @@
 package com.salsal.school.teacher.interfaces;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
 import com.salsal.school.teacher.R;
+import com.salsal.school.teacher.view.ActivityLoading;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,7 +20,6 @@ public abstract class CallbackHandler<T> implements Callback<T> {
     Context context;
     boolean showLoading;
     boolean showError;
-    static int retrycount = 0;
 
     public CallbackHandler(Context context, boolean showLoading, boolean showError) {
         this.context = context;
@@ -26,7 +27,7 @@ public abstract class CallbackHandler<T> implements Callback<T> {
         this.showError = showError;
         if (showLoading)
         {
-            // MessageBox.ShowLoading(context, "", "", true);
+            context.startActivity(new Intent(context, ActivityLoading.class));
         }
     }
 
@@ -35,7 +36,7 @@ public abstract class CallbackHandler<T> implements Callback<T> {
         this.showLoading = this.showError = showLoading;
         if (showLoading)
         {
-            //MessageBox.ShowLoading(context, "", "", true);
+            context.startActivity(new Intent(context, ActivityLoading.class));
         }
     }
 
@@ -47,13 +48,20 @@ public abstract class CallbackHandler<T> implements Callback<T> {
 
         if (response.isSuccessful() && response.body() != null)
         {
-            retrycount = 0;
             onSuccess(response);
+            if (ActivityLoading.instance != null)
+            {
+                ActivityLoading.instance.finish();
+            }
         } else
         {
             APIErrorResult apiErrorResult = null;
             try
             {
+                if (ActivityLoading.instance != null)
+                {
+                    ActivityLoading.instance.finish();
+                }
                 apiErrorResult = new Gson().fromJson(response.errorBody().string(), APIErrorResult.class);
                 apiErrorResult.setCode(response.code());
 
@@ -67,15 +75,6 @@ public abstract class CallbackHandler<T> implements Callback<T> {
                 apiErrorResult = new APIErrorResult();
                 apiErrorResult.setCode(-1);
                 apiErrorResult.setMessage(new JsonPrimitive(context.getResources().getString(R.string.failed_server)));
-                if (retrycount < 3)
-                {
-                    retrycount++;
-                    call.clone().enqueue(this);
-                    return;
-                } else
-                {
-                    retrycount = 0;
-                }
             }
             if (showError)
             {

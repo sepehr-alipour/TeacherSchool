@@ -15,8 +15,8 @@ import com.salsal.school.teacher.adapter.AdapterNofits;
 import com.salsal.school.teacher.interfaces.APIErrorResult;
 import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnNotifClickListener;
-import com.salsal.school.teacher.model.ClsNotification;
-import com.salsal.school.teacher.webservice.ValueKeeper;
+import com.salsal.school.teacher.model.NotificationRes;
+import com.salsal.school.teacher.utils.PreferenceManager;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
@@ -85,10 +85,10 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
                     fabAddNotif.show();
             }
         });
-        WebServiceHelper.get(getContext()).getNotifications(ValueKeeper.getUserProfile(getContext()).get(ValueKeeper.PREF_TOKEN))
-                .enqueue(new CallbackHandler<ClsNotification>(getContext(), true, true) {
+        WebServiceHelper.get(getContext()).getNotifications(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
+                .enqueue(new CallbackHandler<NotificationRes>(getContext(), true, true) {
                     @Override
-                    public void onSuccess(Response<ClsNotification> response) {
+                    public void onSuccess(Response<NotificationRes> response) {
                         notifList.setAdapter(new AdapterNofits(response.body().getData(), FragmentNotifications.this));
                     }
 
@@ -108,9 +108,9 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
     }
 
     @Override
-    public void clicked(ClsNotification.DataBean notification) {
+    public void clicked(NotificationRes.DataBean notification) {
         Intent intent = new Intent(getContext(), ActivityNotifDetail.class);
-        intent.putExtra("notifId", notification.getId());
+        intent.putExtra(ActivityNotifDetail.INTENT_NOTIF_ID, notification.getId());
         startActivity(intent);
     }
 

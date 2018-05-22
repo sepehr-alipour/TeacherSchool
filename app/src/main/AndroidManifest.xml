@@ -25,6 +25,13 @@
         </activity>
         <activity android:name=".view.ActivityNotifDetail" />
         <activity android:name=".view.ActivityNotificationNew" />
+        <activity android:name=".view.ActivityActivities" />
+        <activity android:name=".view.ActivityTaskNew" />
+        <activity android:name=".view.ActivityAttendance" />
+        <activity
+            android:name=".view.ActivityLoading"
+            android:theme="@style/Theme.AppCompat.Translucent">
+        </activity>
     </application>
 
 </manifest>

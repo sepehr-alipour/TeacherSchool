@@ -7,6 +7,7 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,12 +23,12 @@ import butterknife.ButterKnife;
 
 public class AdapterReceiverMessageStudent extends RecyclerView.Adapter<AdapterReceiverMessageStudent.ViewHolder> {
     private final OnReceiverClickListener clickListener;
-    List<StudentRes> messageItems;
+    List<StudentRes.DataBean> messageItems;
     @BindView(R.id.rootItemw)
     LinearLayout rootItemw;
     private SparseBooleanArray itemStateArray = new SparseBooleanArray();
 
-    public AdapterReceiverMessageStudent(List<StudentRes> messageItems, OnReceiverClickListener listener) {
+    public AdapterReceiverMessageStudent(List<StudentRes.DataBean> messageItems, OnReceiverClickListener listener) {
         this.messageItems = messageItems;
         this.clickListener = listener;
     }
@@ -42,12 +43,12 @@ public class AdapterReceiverMessageStudent extends RecyclerView.Adapter<AdapterR
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final StudentRes messageItem = messageItems.get(position);
+        final StudentRes.DataBean messageItem = messageItems.get(position);
         holder.txtTitle.setText(messageItem.getName());
         holder.imgIcon.setImageResource(R.drawable.ic_action_student);
         holder.chkItem.setVisibility(View.VISIBLE);
         holder.bind(position);
-       
+
     }
 
 
@@ -92,6 +93,7 @@ public class AdapterReceiverMessageStudent extends RecyclerView.Adapter<AdapterR
 
         @Override
         public void onClick(View view) {
+            clickListener.clicked(messageItems.get(getAdapterPosition()), getAdapterPosition());
             int adapterPosition = getAdapterPosition();
             if (!itemStateArray.get(adapterPosition, false)) {
                 chkItem.setChecked(true);

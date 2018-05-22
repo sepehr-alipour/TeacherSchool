@@ -4,6 +4,7 @@ import android.content.Context;
 
 
 import com.salsal.school.teacher.interfaces.ApiInterface;
+import com.salsal.school.teacher.utils.PreferenceManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,7 +29,7 @@ public class WebServiceHelper {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ValueKeeper.BASE_URL)
+                .baseUrl(PreferenceManager.BASE_URL)
                 //  .client(okClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
