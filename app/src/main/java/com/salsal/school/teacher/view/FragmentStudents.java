@@ -56,7 +56,7 @@ public class FragmentStudents extends Fragment implements OnViewClickListener, O
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentProfile.
+     * @return A new instance of fragment FragmentProfileDetail.
      */
     // TODO: Rename and change types and number of parameters
     public static FragmentStudents newInstance(String param1, String param2) {

@@ -1,6 +1,5 @@
 package com.salsal.school.teacher.view;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -67,12 +66,17 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener,
         Fragment selectedFragment = null;
         switch (position) {
             case TAB_PROFILE:
-                selectedFragment = FragmentProfile.newInstance("", "");
+                toolbar.setVisibility(View.GONE);
+                selectedFragment = FragmentProfile.newInstance("");
                 break;
             case TAB_STUDENTS:
+                toolbar.setVisibility(View.VISIBLE);
+
                 selectedFragment = FragmentStudents.newInstance("", "");
                 break;
             case TAB_NOTIFICATIONS:
+                toolbar.setVisibility(View.VISIBLE);
+
                 selectedFragment = FragmentNotifications.newInstance("", "");
                 break;
         }

@@ -1,23 +1,29 @@
 package com.salsal.school.teacher.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatRatingBar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.model.TeacherProfileResponce;
-import com.salsal.school.teacher.utils.PreferenceManager;
-import com.salsal.school.teacher.webservice.WebServiceHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,101 +31,122 @@ import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Response;
 
+/**
+ * Created by Taraabar on 12/16/2016.
+ */
+
 public class FragmentProfile extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
+
     @BindView(R.id.profile_image)
     CircleImageView profileImage;
-    @BindView(R.id.headerLayout)
-    RelativeLayout headerLayout;
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
+    @BindView(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.appBarLayout)
+    AppBarLayout appBarLayout;
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+    @BindView(R.id.htab_maincontent)
+    CoordinatorLayout htabMaincontent;
     Unbinder unbinder;
-    @BindView(R.id.txtEducation)
-    TextView txtEducation;
-    @BindView(R.id.txtBirthday)
-    TextView txtBirthday;
-    @BindView(R.id.txtEmail)
-    TextView txtEmail;
-    @BindView(R.id.txtMobile)
-    TextView txtMobile;
-    @BindView(R.id.txtNationalCode)
-    TextView txtNationalCode;
-    @BindView(R.id.ratingBar)
-    AppCompatRatingBar ratingBar;
     @BindView(R.id.txtName)
     TextView txtName;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-    public FragmentProfile() {
-        // Required empty public constructor
+    public void dataLoaded(Response<TeacherProfileResponce> response) {
+        txtName.setText(response.body().getData().getName());
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.ic_action_profile);
+        Glide.with(getContext())
+                .setDefaultRequestOptions(requestOptions)
+                .load(response.body().getData().getImageUrl())
+                .into(profileImage);
     }
 
-    public static FragmentProfile newInstance(String param1, String param2) {
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        unbinder = ButterKnife.bind(this, view);
+        initInstances();
+        setupViewPager(viewPager);
+        return view;
+    }
+
+    public static FragmentProfile newInstance(String param1) {
         FragmentProfile fragment = new FragmentProfile();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("param", param1);
         fragment.setArguments(args);
         return fragment;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.profile_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFrag(FragmentProfileDetail.newInstance("", ""), "مشخصات کلی");
+        //adapter.addFrag(FragmentDelegates.newInstance(id), getString(R.string.delegates));
+        //   adapter.addFrag(FragmentVenue.newInstance(2), getString(R.string.venue));
+        //adapter.addFrag(FragmentAbout.newInstance(aboutText), getString(R.string.about));
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        WebServiceHelper.get(getContext()).getTeacherProfile(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_ID)
-                , PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
-                .enqueue(new CallbackHandler<TeacherProfileResponce>(getContext(), true, true) {
-                    @Override
-                    public void onSuccess(Response<TeacherProfileResponce> response) {
-                        txtBirthday.setText(response.body().getData().getBirthDate());
-                        txtEducation.setText(response.body().getData().getEducation());
-                        txtEmail.setText(response.body().getData().getEmail());
-                        txtMobile.setText(response.body().getData().getPhoneNumber());
-                        txtNationalCode.setText(response.body().getData().getNationalCode());
-                        txtName.setText(response.body().getData().getName());
-                        ratingBar.setRating(response.body().getData().getRate());
-                        Glide.with(getContext())
-                                .load(response.body().getData().getImageUrl())
-                                .into(profileImage);
-                    }
-
-                    @Override
-                    public void onFailed(APIErrorResult errorResult) {
-
-                    }
-                });
-        unbinder = ButterKnife.bind(this, view);
-        return view;
+    private void initInstances() {
+        collapsingToolbarLayout.setTitleEnabled(false);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

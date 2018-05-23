@@ -56,7 +56,7 @@ public class AdapterViewPager extends FragmentPagerAdapter {
                 return FragmentMessages.newInstance(4);
 
             case 4:
-                return FragmentProfile.newInstance(5);*//*
+                return FragmentProfileDetail.newInstance(5);*//*
 
         }
         return null;
