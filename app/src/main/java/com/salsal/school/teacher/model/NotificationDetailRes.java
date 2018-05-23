@@ -7,7 +7,7 @@ public class NotificationDetailRes {
 
     /**
      * msg : ok
-     * data : {"title":"عنوان asdاعل2ان","message":"متن اعلان","type":1,"file_url":"link","updated_at":"2018-05-22 05:08:15","created_at":"2018-05-22 05:08:15","id":2}
+     * data : {"id":1,"title":"new year","message":"متن اعلان","type":1,"file_url":"link","recipient_type":"Parent","user_id":1,"created_at":"2018-05-23 15:27:46","updated_at":"2018-05-23 15:27:46"}
      */
 
     @SerializedName("msg")
@@ -33,15 +33,19 @@ public class NotificationDetailRes {
 
     public static class DataBean {
         /**
-         * title : عنوان asdاعل2ان
+         * id : 1
+         * title : new year
          * message : متن اعلان
          * type : 1
          * file_url : link
-         * updated_at : 2018-05-22 05:08:15
-         * created_at : 2018-05-22 05:08:15
-         * id : 2
+         * recipient_type : Parent
+         * user_id : 1
+         * created_at : 2018-05-23 15:27:46
+         * updated_at : 2018-05-23 15:27:46
          */
 
+        @SerializedName("id")
+        private int id;
         @SerializedName("title")
         private String title;
         @SerializedName("message")
@@ -50,12 +54,22 @@ public class NotificationDetailRes {
         private int type;
         @SerializedName("file_url")
         private String fileUrl;
-        @SerializedName("updated_at")
-        private String updatedAt;
+        @SerializedName("recipient_type")
+        private String recipientType;
+        @SerializedName("user_id")
+        private int userId;
         @SerializedName("created_at")
         private String createdAt;
-        @SerializedName("id")
-        private int id;
+        @SerializedName("updated_at")
+        private String updatedAt;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         public String getTitle() {
             return title;
@@ -89,12 +103,20 @@ public class NotificationDetailRes {
             this.fileUrl = fileUrl;
         }
 
-        public String getUpdatedAt() {
-            return updatedAt;
+        public String getRecipientType() {
+            return recipientType;
         }
 
-        public void setUpdatedAt(String updatedAt) {
-            this.updatedAt = updatedAt;
+        public void setRecipientType(String recipientType) {
+            this.recipientType = recipientType;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
         }
 
         public String getCreatedAt() {
@@ -105,12 +127,12 @@ public class NotificationDetailRes {
             this.createdAt = createdAt;
         }
 
-        public int getId() {
-            return id;
+        public String getUpdatedAt() {
+            return updatedAt;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
         }
     }
 }

@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 
 import java.util.Locale;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LocaleManager {
 

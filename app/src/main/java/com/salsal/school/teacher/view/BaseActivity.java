@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.salsal.school.teacher.utils.LocaleManager;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BaseActivity extends AppCompatActivity {
     @Override

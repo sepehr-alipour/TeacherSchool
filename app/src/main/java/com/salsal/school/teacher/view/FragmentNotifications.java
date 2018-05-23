@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterNofits;
@@ -34,6 +36,12 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
     Unbinder unbinder;
     @BindView(R.id.fabAddNotif)
     FloatingActionButton fabAddNotif;
+    @BindView(R.id.receivedMessageTab)
+    Button receivedMessageTab;
+    @BindView(R.id.sentMessageTab)
+    Button sentMessageTab;
+    @BindView(R.id.tabLayout)
+    LinearLayout tabLayout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -69,6 +77,9 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
         unbinder = ButterKnife.bind(this, view);
         fabAddNotif.setOnClickListener(this);
+        receivedMessageTab.setOnClickListener(this);
+        sentMessageTab.setOnClickListener(this);
+        setStyle(0);
         notifList.setLayoutManager(new LinearLayoutManager(getContext()));
         notifList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -85,18 +96,7 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
                     fabAddNotif.show();
             }
         });
-        WebServiceHelper.get(getContext()).getNotifications(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
-                .enqueue(new CallbackHandler<NotificationRes>(getContext(), true, true) {
-                    @Override
-                    public void onSuccess(Response<NotificationRes> response) {
-                        notifList.setAdapter(new AdapterNofits(response.body().getData(), FragmentNotifications.this));
-                    }
 
-                    @Override
-                    public void onFailed(APIErrorResult errorResult) {
-
-                    }
-                });
 
         return view;
     }
@@ -109,6 +109,9 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
 
     @Override
     public void clicked(NotificationRes.DataBean notification) {
+        if ((notification.getUserId() + "").equalsIgnoreCase(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_ID))) {
+            return;
+        }
         Intent intent = new Intent(getContext(), ActivityNotifDetail.class);
         intent.putExtra(ActivityNotifDetail.INTENT_NOTIF_ID, notification.getId());
         startActivity(intent);
@@ -124,6 +127,52 @@ public class FragmentNotifications extends Fragment implements OnNotifClickListe
 
                 startActivity(new Intent(getContext(), ActivityNotificationNew.class));
                 break;
+            case R.id.receivedMessageTab:
+                setStyle(0);
+                break;
+            case R.id.sentMessageTab:
+                setStyle(1);
+                break;
+        }
+    }
+
+    private void setStyle(int pos) {
+        if (pos == 0) {
+            receivedMessageTab.setBackgroundResource(R.drawable.shape_blue_fill);
+            receivedMessageTab.setTextColor(getResources().getColor(android.R.color.white));
+            sentMessageTab.setBackgroundResource(R.drawable.shape_blue_blank);
+            sentMessageTab.setTextColor(getResources().getColor(R.color.colorAccent));
+
+            WebServiceHelper.get(getContext()).getNotifications(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
+                    .enqueue(new CallbackHandler<NotificationRes>(getContext(), true, true) {
+                        @Override
+                        public void onSuccess(Response<NotificationRes> response) {
+                            notifList.setAdapter(new AdapterNofits(response.body().getData(), FragmentNotifications.this));
+                        }
+
+                        @Override
+                        public void onFailed(APIErrorResult errorResult) {
+
+                        }
+                    });
+        } else {
+            sentMessageTab.setBackgroundResource(R.drawable.shape_blue_fill);
+            sentMessageTab.setTextColor(getResources().getColor(android.R.color.white));
+            receivedMessageTab.setBackgroundResource(R.drawable.shape_blue_blank);
+            receivedMessageTab.setTextColor(getResources().getColor(R.color.colorAccent));
+
+            WebServiceHelper.get(getContext()).getSentBoxNotifications(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
+                    .enqueue(new CallbackHandler<NotificationRes>(getContext(), true, true) {
+                        @Override
+                        public void onSuccess(Response<NotificationRes> response) {
+                            notifList.setAdapter(new AdapterNofits(response.body().getData(), FragmentNotifications.this));
+                        }
+
+                        @Override
+                        public void onFailed(APIErrorResult errorResult) {
+
+                        }
+                    });
         }
     }
 }

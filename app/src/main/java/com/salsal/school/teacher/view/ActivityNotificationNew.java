@@ -130,6 +130,7 @@ public class ActivityNotificationNew extends BaseActivity implements View.OnClic
                 sendNotificationReq.setUserIds(users);
                 sendNotificationReq.setType(((SpnType) (spnType.getSelectedItem())).getId());
                 sendNotificationReq.setFileUrl("http://google.com");
+                sendNotificationReq.setRecipientType(sendNotificationReq.RECIPIENT_TYPE_UNIT);
                 sendNotif(sendNotificationReq);
 
                 break;
@@ -191,6 +192,8 @@ public class ActivityNotificationNew extends BaseActivity implements View.OnClic
             notificationReq.setTitle(edtTitle.getText().toString());
             notificationReq.setMessage(edtMessage.getText().toString());
             notificationReq.setType(((SpnType) (spnType.getSelectedItem())).getId());
+            notificationReq.setRecipientType(notificationReq.RECIPIENT_TYPE_PARENT);
+
             sendNotif(notificationReq);
         } else {
             WebServiceHelper.get(this).getStudentsClass(PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_TOKEN), ((ClassRes.DataBean) data).getId())
@@ -208,6 +211,8 @@ public class ActivityNotificationNew extends BaseActivity implements View.OnClic
                             notificationReq.setTitle(edtTitle.getText().toString());
                             notificationReq.setMessage(edtMessage.getText().toString());
                             notificationReq.setType(((SpnType) (spnType.getSelectedItem())).getId());
+                            notificationReq.setRecipientType(notificationReq.RECIPIENT_TYPE_PARENT);
+
                             sendNotif(notificationReq);
                         }
 

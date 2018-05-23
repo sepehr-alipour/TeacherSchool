@@ -13,7 +13,7 @@ public class NotificationRes {
 
     /**
      * msg : ok
-     * data : [{"id":1,"title":"new notif","message":"متن اعلان","type":1,"file_url":"link","created_at":"2018-05-17 15:14:42","updated_at":"2018-05-17 15:14:42","pivot":{"user_id":1,"notification_id":1,"created_at":"2018-05-17 15:14:42","updated_at":"2018-05-17 15:14:42"}}]
+     * data : [{"id":1,"title":"new year","message":"متن اعلان","type":1,"file_url":"link","recipient_type":"Parent","user_id":1,"created_at":"2018-05-23 15:27:46","updated_at":"2018-05-23 15:27:46"},{"id":2,"title":"new year","message":"متن اعلان","type":1,"file_url":"link","recipient_type":"Parent","user_id":1,"created_at":"2018-05-23 15:29:46","updated_at":"2018-05-23 15:29:46"},{"id":3,"title":"new year","message":"متن اعلان","type":1,"file_url":"link","recipient_type":"Parent","user_id":1,"created_at":"2018-05-23 15:33:57","updated_at":"2018-05-23 15:33:57"}]
      */
 
     @SerializedName("msg")
@@ -40,13 +40,14 @@ public class NotificationRes {
     public static class DataBean {
         /**
          * id : 1
-         * title : new notif
+         * title : new year
          * message : متن اعلان
          * type : 1
          * file_url : link
-         * created_at : 2018-05-17 15:14:42
-         * updated_at : 2018-05-17 15:14:42
-         * pivot : {"user_id":1,"notification_id":1,"created_at":"2018-05-17 15:14:42","updated_at":"2018-05-17 15:14:42"}
+         * recipient_type : Parent
+         * user_id : 1
+         * created_at : 2018-05-23 15:27:46
+         * updated_at : 2018-05-23 15:27:46
          */
 
         @SerializedName("id")
@@ -59,11 +60,14 @@ public class NotificationRes {
         private int type;
         @SerializedName("file_url")
         private String fileUrl;
+        @SerializedName("recipient_type")
+        private String recipientType;
+        @SerializedName("user_id")
+        private int userId;
         @SerializedName("created_at")
         private String createdAt;
         @SerializedName("updated_at")
         private String updatedAt;
-
 
         public int getId() {
             return id;
@@ -105,6 +109,22 @@ public class NotificationRes {
             this.fileUrl = fileUrl;
         }
 
+        public String getRecipientType() {
+            return recipientType;
+        }
+
+        public void setRecipientType(String recipientType) {
+            this.recipientType = recipientType;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
+
         public String getCreatedAt() {
             return createdAt;
         }
@@ -120,6 +140,5 @@ public class NotificationRes {
         public void setUpdatedAt(String updatedAt) {
             this.updatedAt = updatedAt;
         }
-
     }
 }

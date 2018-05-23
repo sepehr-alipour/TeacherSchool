@@ -39,9 +39,18 @@ public class AdapterNofits extends RecyclerView.Adapter<AdapterNofits.ViewHolder
         final NotificationRes.DataBean itemList = listNotif.get(position);
         holder.txtDate.setText(itemList.getCreatedAt());
         holder.txtDesc.setText(itemList.getMessage());
-        holder.txtSender.setText(itemList.getId() + "");
+        holder.txtSender.setText(itemList.getUserId() + "");
         holder.txtTitle.setText(itemList.getTitle());
-        holder.txtType.setText(itemList.getType() + "");
+        String[] testArray = holder.txtDate.getContext().getResources().getStringArray(R.array.notification_type);
+
+        switch (itemList.getType()) {
+            case 1:
+                holder.txtType.setText(testArray[0].split("-")[0]);
+                break;
+            case 2:
+                holder.txtType.setText(testArray[1].split("-")[0]);
+                break;
+        }
     }
 
     @Override

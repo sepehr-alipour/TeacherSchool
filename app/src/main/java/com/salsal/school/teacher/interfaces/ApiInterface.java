@@ -4,6 +4,8 @@ import com.google.gson.JsonObject;
 import com.salsal.school.teacher.model.ActivityDetailsRes;
 import com.salsal.school.teacher.model.ActivityReq;
 import com.salsal.school.teacher.model.ActivityRes;
+import com.salsal.school.teacher.model.AttendanceReq;
+import com.salsal.school.teacher.model.AttendanceRes;
 import com.salsal.school.teacher.model.ClassRes;
 import com.salsal.school.teacher.model.NotificationRes;
 import com.salsal.school.teacher.model.CourseRes;
@@ -49,6 +51,9 @@ public interface ApiInterface {
     @POST(URL_V1 + "/activity")
     Call<ActivityDetailsRes> createActivity(@Query("token") String token, @Body ActivityReq activityReq);
 
+    @POST(URL_V1 + "/attendance")
+    Call<AttendanceRes> attendanceStudent(@Query("token") String token, @Body AttendanceReq attendanceReq);
+
     @GET(URL_V1 + "/teacherProfile/courses")
     Call<CourseRes> getTecherCourses(@Query("token") String token);
 
@@ -60,6 +65,9 @@ public interface ApiInterface {
 
     @GET(URL_V1 + "/notification")
     Call<NotificationRes> getNotifications(@Query("token") String token);
+
+    @GET(URL_V1 + "/notification/sentBox")
+    Call<NotificationRes> getSentBoxNotifications(@Query("token") String token);
 
     @GET(URL_V1 + "/notification/{id}")
     Call<NotificationDetailRes> getNotificationDetails(@Path("id") int notification, @Query("token") String token);

@@ -6,7 +6,6 @@ import java.util.List;
 
 public class ActivityReq {
 
-
     /**
      * title : title1
      * desc : acdesc1
@@ -23,7 +22,7 @@ public class ActivityReq {
     @SerializedName("desc")
     private String desc;
     @SerializedName("atype_id")
-    private String atypeId;
+    private int atypeId;
     @SerializedName("expire_date")
     private String expireDate;
     @SerializedName("file_address")
@@ -51,11 +50,11 @@ public class ActivityReq {
         this.desc = desc;
     }
 
-    public String getAtypeId() {
+    public int getAtypeId() {
         return atypeId;
     }
 
-    public void setAtypeId(String atypeId) {
+    public void setAtypeId(int atypeId) {
         this.atypeId = atypeId;
     }
 

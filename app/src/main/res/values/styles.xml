@@ -6,7 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/iransans</item>
+        <item name="fontFamily">@font/iransans</item>
     </style>
+
 
     <style name="EditTextStyle" parent="Base.Widget.AppCompat.EditText">
         <item name="android:background">@drawable/edit_text</item>
@@ -14,6 +17,7 @@
         <item name="android:gravity">center|right</item>
         <item name="android:layout_height">40dp</item>
     </style>
+
     <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

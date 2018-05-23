@@ -38,7 +38,7 @@
                 android:layout_marginLeft="@dimen/space_5_dp"
                 android:layout_marginRight="@dimen/space_5_dp"
                 android:layout_marginTop="@dimen/space_10_dp"
-                android:background="@drawable/border_shape_blue"
+                android:background="@drawable/shape_blue_blank"
                 android:inputType="text"
                 android:text="ارسال پاسخ"
                 android:textColor="@color/colorPrimary" />

@@ -99,7 +99,8 @@ public class ActivityTaskNew extends BaseActivity implements View.OnClickListene
                                 activityReq.setTitle(edtTitle.getText().toString());
                                 activityReq.setExpireDate(txtDate.getText().toString());
                                 activityReq.setFileAddress("link");
-                                activityReq.setAtypeId(((SpnType) (spnActivity.getSelectedItem())).getId());
+                                activityReq.setAtypeId(1);
+                               // activityReq.setAtypeId(((SpnType) (spnActivity.getSelectedItem())).getId());
                                 ArrayList<Integer> users = new ArrayList<>();
                                 for (int i = 0; i < response.body().getData().size(); i++) {
                                     users.add(response.body().getData().get(i).getUserId());

@@ -1,21 +1,32 @@
 package com.salsal.school.teacher.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
+import com.salsal.school.teacher.interfaces.APIErrorResult;
+import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.interfaces.OnSwitchSelectListener;
+import com.salsal.school.teacher.model.NotificationRes;
 import com.salsal.school.teacher.model.StudentRes;
+import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.FragmentNotifications;
+import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Response;
 
 /**
  * Created by Sepehr on 12/4/2017.
@@ -23,6 +34,7 @@ import butterknife.ButterKnife;
 
 public class AdapterStudents extends RecyclerView.Adapter<AdapterStudents.ViewHolder> {
     private final List<StudentRes.DataBean> studentList;
+    private final OnSwitchSelectListener onSwitchSelectListener;
 
     @Override
     public AdapterStudents.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,20 +42,43 @@ public class AdapterStudents extends RecyclerView.Adapter<AdapterStudents.ViewHo
         return new ViewHolder(view);
     }
 
-    public AdapterStudents(List<StudentRes.DataBean> studentRes) {
+    public AdapterStudents(List<StudentRes.DataBean> studentRes, OnSwitchSelectListener listener) {
         this.studentList = studentRes;
+        this.onSwitchSelectListener = listener;
     }
 
     @Override
-    public void onBindViewHolder(AdapterStudents.ViewHolder holder, int position) {
-        StudentRes.DataBean studentItem = studentList.get(position);
+    public void onBindViewHolder(final AdapterStudents.ViewHolder holder, int position) {
+        final StudentRes.DataBean studentItem = studentList.get(position);
         holder.txtTitle.setText(studentItem.getName());
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(R.drawable.ic_action_profile);
+        holder.btnAbsent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.btnAbsent.setBackgroundResource(R.drawable.shape_blue_fill);
+                holder.btnAbsent.setTextColor(holder.btnAbsent.getContext().getResources().getColor(android.R.color.white));
+                holder.btnAlive.setBackgroundResource(R.drawable.shape_blue_blank);
+                holder.btnAlive.setTextColor(holder.btnAbsent.getContext().getResources().getColor(R.color.colorAccent));
+                onSwitchSelectListener.switched(studentItem, false);
+            }
+        });
+        holder.btnAlive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.btnAlive.setBackgroundResource(R.drawable.shape_blue_fill);
+                holder.btnAlive.setTextColor(holder.btnAbsent.getContext().getResources().getColor(android.R.color.white));
+                holder.btnAbsent.setBackgroundResource(R.drawable.shape_blue_blank);
+                holder.btnAbsent.setTextColor(holder.btnAbsent.getContext().getResources().getColor(R.color.colorAccent));
+                onSwitchSelectListener.switched(studentItem, true);
+
+            }
+        });
         Glide.with(holder.txtTitle.getContext())
                 .setDefaultRequestOptions(requestOptions)
                 .load(studentItem.getImageUrl())
                 .into(holder.imgProfile);
+
     }
 
     @Override
@@ -59,6 +94,11 @@ public class AdapterStudents extends RecyclerView.Adapter<AdapterStudents.ViewHo
         @BindView(R.id.profile_image)
         ImageView imgProfile;
 
+        @BindView(R.id.btnAbsent)
+        Button btnAbsent;
+
+        @BindView(R.id.btnAlive)
+        Button btnAlive;
 
         public ViewHolder(View itemView) {
 

@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_20_dp"
-                    android:background="@drawable/border_shape_blue"
+                    android:background="@drawable/shape_blue_blank"
                     android:text="@string/btn_send"
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
