@@ -103,7 +103,7 @@ public class FragmentStudents extends Fragment implements OnViewClickListener, O
 
         GridItem gridItemActivity = new GridItem();
         gridItemActivity.setTitle("فعالیت ها");
-        gridItemActivity.setIcon(R.drawable.ic_action_edit);
+        gridItemActivity.setIcon(R.drawable.ic_action_activity);
         gridItemActivity.setType(TYPE_ACTIVITY);
         list.add(gridItemActivity);
         return list;
@@ -142,8 +142,8 @@ public class FragmentStudents extends Fragment implements OnViewClickListener, O
         switch (datatype) {
             case TYPE_ACTIVITY:
                 Intent intent = new Intent(getContext(), ActivityActivities.class);
-                intent.putExtra(ActivityActivities.INTENT_KEY_CLASS_ID,((ClassRes.DataBean) data).getId());
-                intent.putExtra(ActivityActivities.INTENT_KEY_COURSE_ID, PreferenceManager.getTeacherCourseId(getContext()) );
+                intent.putExtra(ActivityActivities.INTENT_KEY_CLASS_ID, ((ClassRes.DataBean) data).getId());
+                intent.putExtra(ActivityActivities.INTENT_KEY_COURSE_ID, PreferenceManager.getTeacherCourseId(getContext()));
                 startActivity(intent);
 
                 break;
