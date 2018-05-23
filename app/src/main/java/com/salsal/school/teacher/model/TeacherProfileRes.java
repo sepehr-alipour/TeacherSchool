@@ -2,7 +2,7 @@ package com.salsal.school.teacher.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TeacherProfileResponce {
+public class TeacherProfileRes {
     /**
      * msg : ok
      * data : {"id":1,"education":"لیسنانس","name":"سپهر علی پور","birth_date":"17/11/1370","image_url":"http://media.jamnews.ir/medium1/1392/04/22/IMG12432009.jpeg","rate":"3","email":"alipour.dev@gmail.com","phone_number":"09363531363","national_code":"4900191051","user_id":1,"created_at":"2018-05-12 11:03:21","updated_at":"2018-05-12 11:03:21"}

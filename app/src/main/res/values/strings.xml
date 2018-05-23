@@ -16,7 +16,7 @@
     <string name="toast_empty_edittext">لطفا نام کاربری و رمز عبور خود را وارد کنید</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">profile</string>
-
+<string name="priority">زنگ %1$d</string>
     <string-array name="notification_type">
         <item>عمومی-1</item>
         <item>دعوتنامه-2</item>

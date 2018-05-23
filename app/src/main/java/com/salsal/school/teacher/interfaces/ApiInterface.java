@@ -11,10 +11,11 @@ import com.salsal.school.teacher.model.NotificationRes;
 import com.salsal.school.teacher.model.CourseRes;
 import com.salsal.school.teacher.model.LoginReq;
 import com.salsal.school.teacher.model.LoginRes;
+import com.salsal.school.teacher.model.ScheduleRes;
 import com.salsal.school.teacher.model.SendNotificationReq;
 import com.salsal.school.teacher.model.NotificationDetailRes;
 import com.salsal.school.teacher.model.StudentRes;
-import com.salsal.school.teacher.model.TeacherProfileResponce;
+import com.salsal.school.teacher.model.TeacherProfileRes;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -39,7 +40,7 @@ public interface ApiInterface {
     Call<LoginRes> loginUser(@Body LoginReq req);
 
     @GET(URL_V1 + "/teacherProfile/{id}")
-    Call<TeacherProfileResponce> getTeacherProfile(@Path("id") String id, @Query("token") String token);
+    Call<TeacherProfileRes> getTeacherProfile(@Path("id") String id, @Query("token") String token);
 
 
     @GET(URL_V1 + "/teacherProfile/classes")
@@ -68,6 +69,9 @@ public interface ApiInterface {
 
     @GET(URL_V1 + "/notification/sentBox")
     Call<NotificationRes> getSentBoxNotifications(@Query("token") String token);
+
+    @GET(URL_V1 + "/schedule")
+    Call<ScheduleRes> getTeacherSchedule(@Query("token") String token);
 
     @GET(URL_V1 + "/notification/{id}")
     Call<NotificationDetailRes> getNotificationDetails(@Path("id") int notification, @Query("token") String token);

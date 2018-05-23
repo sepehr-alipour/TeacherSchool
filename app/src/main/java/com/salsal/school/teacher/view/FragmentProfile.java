@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.model.TeacherProfileResponce;
+import com.salsal.school.teacher.model.TeacherProfileRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class FragmentProfile extends Fragment {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    public void dataLoaded(Response<TeacherProfileResponce> response) {
+    public void dataLoaded(Response<TeacherProfileRes> response) {
         txtName.setText(response.body().getData().getName());
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(R.drawable.ic_action_profile);
@@ -88,10 +88,7 @@ public class FragmentProfile extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(FragmentProfileDetail.newInstance("", ""), "مشخصات کلی");
-        //adapter.addFrag(FragmentDelegates.newInstance(id), getString(R.string.delegates));
-        //   adapter.addFrag(FragmentVenue.newInstance(2), getString(R.string.venue));
-        //adapter.addFrag(FragmentAbout.newInstance(aboutText), getString(R.string.about));
-        viewPager.setOffscreenPageLimit(3);
+        adapter.addFrag(FragmentProfileSchedule.newInstance("", ""), "برنامه هفتگی");
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
