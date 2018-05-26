@@ -13,9 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ActivityMain" />
+        <activity android:name=".view.Activities.ActivityMain" />
         <activity
-            android:name=".view.ActivityLogin"
+            android:name=".view.Activities.ActivityLogin"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,13 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ActivityNotifDetail" />
-        <activity android:name=".view.ActivityNotificationNew" />
-        <activity android:name=".view.ActivityActivities" />
-        <activity android:name=".view.ActivityTaskNew" />
-        <activity android:name=".view.ActivityAttendance" />
+        <activity android:name=".view.Activities.ActivityNotifDetail" />
+        <activity android:name=".view.Activities.ActivityNotificationNew" />
+        <activity android:name=".view.Activities.ActivityActivities" />
+        <activity android:name=".view.Activities.ActivityTaskNew" />
+        <activity android:name=".view.Activities.ActivityAttendance" />
         <activity
-            android:name=".view.ActivityLoading"
+            android:name=".view.Activities.ActivityLoading"
             android:theme="@style/Theme.AppCompat.Translucent"></activity>
     </application>
 

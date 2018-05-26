@@ -1,7 +1,8 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import com.salsal.school.teacher.interfaces.APIErrorResult;
 import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.model.TeacherProfileRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.BaseFragment;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
@@ -22,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import retrofit2.Response;
 
-public class FragmentProfileDetail extends Fragment {
+public class FragmentProfileDetail extends BaseFragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,6 +42,10 @@ public class FragmentProfileDetail extends Fragment {
     TextView txtNationalCode;
     @BindView(R.id.ratingBar)
     AppCompatRatingBar ratingBar;
+    /*@BindView(R.id.fabEdit)
+    FloatingActionButton fabEdit;*/
+    @BindView(R.id.list)
+    NestedScrollView list;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,7 +67,7 @@ public class FragmentProfileDetail extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-      //  inflater.inflate(R.menu.profile_menu, menu);
+        //  inflater.inflate(R.menu.profile_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }
@@ -82,6 +88,7 @@ public class FragmentProfileDetail extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_profile_details, container, false);
+        unbinder = ButterKnife.bind(this, view);
         WebServiceHelper.get(getContext()).getTeacherProfile(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_ID)
                 , PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
                 .enqueue(new CallbackHandler<TeacherProfileRes>(getContext(), true, true) {
@@ -101,7 +108,6 @@ public class FragmentProfileDetail extends Fragment {
 
                     }
                 });
-        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -109,5 +115,14 @@ public class FragmentProfileDetail extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fabEdit:
+
+        }
+
     }
 }

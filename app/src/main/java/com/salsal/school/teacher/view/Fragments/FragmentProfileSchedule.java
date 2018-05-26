@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterSchedule;
@@ -17,6 +16,7 @@ import com.salsal.school.teacher.interfaces.APIErrorResult;
 import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.model.ScheduleRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.BaseFragment;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import retrofit2.Response;
 
-public class FragmentProfileSchedule extends Fragment {
+public class FragmentProfileSchedule extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

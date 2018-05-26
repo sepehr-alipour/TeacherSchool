@@ -2,13 +2,12 @@ package com.salsal.school.teacher.interfaces;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.view.ActivityLoading;
+import com.salsal.school.teacher.view.Activities.ActivityLoading;
 
 import retrofit2.Call;
 import retrofit2.Callback;

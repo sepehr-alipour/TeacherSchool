@@ -1,32 +1,23 @@
 package com.salsal.school.teacher.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnSwitchSelectListener;
-import com.salsal.school.teacher.model.NotificationRes;
 import com.salsal.school.teacher.model.StudentRes;
-import com.salsal.school.teacher.utils.PreferenceManager;
-import com.salsal.school.teacher.view.FragmentNotifications;
-import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Response;
 
 /**
  * Created by Sepehr on 12/4/2017.

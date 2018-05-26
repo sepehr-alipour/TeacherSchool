@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -32,7 +32,6 @@ import com.salsal.school.teacher.utils.PreferenceManager;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

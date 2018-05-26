@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,6 +32,8 @@ import com.salsal.school.teacher.model.ReceiverMessageItem;
 import com.salsal.school.teacher.model.SpnType;
 import com.salsal.school.teacher.model.StudentRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.BaseActivity;
+import com.salsal.school.teacher.view.Fragments.BottomSheetFragmentStudents;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,13 +12,13 @@ import android.widget.Toast;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterStudents;
 import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.ApiInterface;
 import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnSwitchSelectListener;
 import com.salsal.school.teacher.model.AttendanceReq;
 import com.salsal.school.teacher.model.AttendanceRes;
 import com.salsal.school.teacher.model.StudentRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.BaseActivity;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;

@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.model.LoginReq;
 import com.salsal.school.teacher.model.LoginRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.BaseActivity;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;

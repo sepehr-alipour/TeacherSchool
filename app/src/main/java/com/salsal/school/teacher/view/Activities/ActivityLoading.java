@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Activities;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import com.salsal.school.teacher.R;
+import com.salsal.school.teacher.view.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.support.v4.app.Fragment;
 

@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.salsal.school.teacher.view.FragmentProfileDetail">
+    tools:context="com.salsal.school.teacher.view.Fragments.FragmentProfileDetail">
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -197,15 +198,4 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="15dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_action_edit"
-        android:visibility="gone"
-        app:fabSize="normal" />
 </RelativeLayout>

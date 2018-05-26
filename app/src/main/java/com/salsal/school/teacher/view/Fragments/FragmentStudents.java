@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,9 @@ import com.salsal.school.teacher.interfaces.OnViewClickListener;
 import com.salsal.school.teacher.model.ClassRes;
 import com.salsal.school.teacher.model.GridItem;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.Activities.ActivityActivities;
+import com.salsal.school.teacher.view.Activities.ActivityAttendance;
+import com.salsal.school.teacher.view.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class FragmentStudents extends Fragment implements OnViewClickListener, OnDataSelectListener {
+public class FragmentStudents extends BaseFragment implements OnViewClickListener, OnDataSelectListener {
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

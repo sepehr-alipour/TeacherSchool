@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,10 @@ import android.view.View;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.salsal.school.teacher.R;
+import com.salsal.school.teacher.view.BaseActivity;
+import com.salsal.school.teacher.view.Fragments.FragmentNotifications;
+import com.salsal.school.teacher.view.Fragments.FragmentProfile;
+import com.salsal.school.teacher.view.Fragments.FragmentStudents;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

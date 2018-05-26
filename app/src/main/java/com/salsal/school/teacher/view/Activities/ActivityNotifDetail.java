@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import com.salsal.school.teacher.interfaces.APIErrorResult;
 import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.model.NotificationDetailRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.BaseActivity;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;

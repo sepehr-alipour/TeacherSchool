@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +22,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.model.TeacherProfileRes;
+import com.salsal.school.teacher.view.BaseActivity;
+import com.salsal.school.teacher.view.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,7 @@ import retrofit2.Response;
  * Created by Taraabar on 12/16/2016.
  */
 
-public class FragmentProfile extends Fragment {
+public class FragmentProfile extends BaseFragment {
 
 
     @BindView(R.id.profile_image)
@@ -55,6 +58,8 @@ public class FragmentProfile extends Fragment {
     TextView txtName;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.fabEdit)
+    FloatingActionButton fabEdit;
 
     public void dataLoaded(Response<TeacherProfileRes> response) {
         txtName.setText(response.body().getData().getName());
@@ -74,6 +79,12 @@ public class FragmentProfile extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         initInstances();
         setupViewPager(viewPager);
+        fabEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
     }
 
@@ -98,6 +109,9 @@ public class FragmentProfile extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
+                if (position == 1)
+                    fabEdit.hide();
+                else fabEdit.show();
             }
 
             @Override

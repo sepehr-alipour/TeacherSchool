@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,9 @@ import com.salsal.school.teacher.interfaces.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnNotifClickListener;
 import com.salsal.school.teacher.model.NotificationRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
+import com.salsal.school.teacher.view.Activities.ActivityNotifDetail;
+import com.salsal.school.teacher.view.Activities.ActivityNotificationNew;
+import com.salsal.school.teacher.view.BaseFragment;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
@@ -26,7 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import retrofit2.Response;
 
-public class FragmentNotifications extends Fragment implements OnNotifClickListener, View.OnClickListener {
+public class FragmentNotifications extends BaseFragment implements OnNotifClickListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
