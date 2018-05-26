@@ -4,6 +4,7 @@
     <string name="btn_login">ورود</string>
     <string name="btn_send">ارسال</string>
     <string name="btn_send_message">ارسال پیام به</string>
+    <string name="btn_send_activity">تعریف فعالیت برای</string>
     <string name="hint_username">نام کاربری</string>
     <string name="hint_title_message">عنوان پیام</string>
     <string name="hint_title_activity">عنوان فعالیت</string>

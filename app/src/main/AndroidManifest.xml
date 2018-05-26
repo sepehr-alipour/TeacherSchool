@@ -30,8 +30,7 @@
         <activity android:name=".view.ActivityAttendance" />
         <activity
             android:name=".view.ActivityLoading"
-            android:theme="@style/Theme.AppCompat.Translucent">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Translucent"></activity>
     </application>
 
 </manifest>
