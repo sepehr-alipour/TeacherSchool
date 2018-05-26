@@ -2,6 +2,7 @@ package com.salsal.school.teacher.interfaces;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -25,8 +26,7 @@ public abstract class CallbackHandler<T> implements Callback<T> {
         this.context = context;
         this.showLoading = showLoading;
         this.showError = showError;
-        if (showLoading)
-        {
+        if (showLoading) {
             context.startActivity(new Intent(context, ActivityLoading.class));
         }
     }
@@ -34,9 +34,9 @@ public abstract class CallbackHandler<T> implements Callback<T> {
     public CallbackHandler(Context context, boolean showLoading) {
         this.context = context;
         this.showLoading = this.showError = showLoading;
-        if (showLoading)
-        {
+        if (showLoading) {
             context.startActivity(new Intent(context, ActivityLoading.class));
+
         }
     }
 
@@ -46,38 +46,30 @@ public abstract class CallbackHandler<T> implements Callback<T> {
 
         //MessageBox.HideLoading(context);
 
-        if (response.isSuccessful() && response.body() != null)
-        {
+        if (response.isSuccessful() && response.body() != null) {
             onSuccess(response);
-            if (ActivityLoading.instance != null)
-            {
+            if (ActivityLoading.instance != null) {
                 ActivityLoading.instance.finish();
             }
-        } else
-        {
+        } else {
             APIErrorResult apiErrorResult = null;
-            try
-            {
-                if (ActivityLoading.instance != null)
-                {
+            try {
+                if (ActivityLoading.instance != null) {
                     ActivityLoading.instance.finish();
                 }
                 apiErrorResult = new Gson().fromJson(response.errorBody().string(), APIErrorResult.class);
                 apiErrorResult.setCode(response.code());
 
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (apiErrorResult == null)
-            {
+            if (apiErrorResult == null) {
 
                 apiErrorResult = new APIErrorResult();
                 apiErrorResult.setCode(-1);
                 apiErrorResult.setMessage(new JsonPrimitive(context.getResources().getString(R.string.failed_server)));
             }
-            if (showError)
-            {
+            if (showError) {
                 //MessageBox.Show(context, context.getResources().getString(R.string.error), apiErrorResult.getMessage(), null, MessageBox.MessageBoxIcon.Error);
             }
             onFailed(apiErrorResult);

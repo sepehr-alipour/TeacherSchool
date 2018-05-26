@@ -12,8 +12,8 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class PreferenceManager {
     private static PreferenceManager ourInstance = new PreferenceManager();
-    //public static final String BASE_URL = "http://192.168.2.119:80";
-    public static final String BASE_URL = "http://192.168.1.12:80";
+    public static final String BASE_URL = "http://192.168.2.119:80";
+   // public static final String BASE_URL = "http://192.168.1.12:80";
     //public static final String BASE_URL = "http://192.168.43.114:80";
     public static final int PER_PAGE = 10;
     private static final String PRE_USER_PROFILE = "user_profile";

@@ -75,21 +75,29 @@ public class FragmentProfileSchedule extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile_schedule, container, false);
         unbinder = ButterKnife.bind(this, view);
-        WebServiceHelper.get(getContext()).getTeacherSchedule(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
-                .enqueue(new CallbackHandler<ScheduleRes>(getContext(), true, true) {
-                    @Override
-                    public void onSuccess(Response<ScheduleRes> response) {
-                        AdapterSchedule adapterSchedule = new AdapterSchedule(response.body().getData());
-                        list.setLayoutManager(new LinearLayoutManager(getContext()));
-                        list.setAdapter(adapterSchedule);
-                    }
 
-                    @Override
-                    public void onFailed(APIErrorResult errorResult) {
-
-                    }
-                });
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            WebServiceHelper.get(getContext()).getTeacherSchedule(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
+                    .enqueue(new CallbackHandler<ScheduleRes>(getContext(), true, true) {
+                        @Override
+                        public void onSuccess(Response<ScheduleRes> response) {
+                            AdapterSchedule adapterSchedule = new AdapterSchedule(response.body().getData());
+                            list.setLayoutManager(new LinearLayoutManager(getContext()));
+                            list.setAdapter(adapterSchedule);
+                        }
+
+                        @Override
+                        public void onFailed(APIErrorResult errorResult) {
+
+                        }
+                    });
+        }
     }
 
     @Override
