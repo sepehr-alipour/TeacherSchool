@@ -15,6 +15,7 @@ import com.salsal.school.teacher.model.ScheduleRes;
 import com.salsal.school.teacher.model.SendNotificationReq;
 import com.salsal.school.teacher.model.NotificationDetailRes;
 import com.salsal.school.teacher.model.StudentRes;
+import com.salsal.school.teacher.model.TeacherProfileReq;
 import com.salsal.school.teacher.model.TeacherProfileRes;
 
 import retrofit2.Call;
@@ -58,11 +59,11 @@ public interface ApiInterface {
     @GET(URL_V1 + "/teacherProfile/courses")
     Call<CourseRes> getTecherCourses(@Query("token") String token);
 
+    @POST(URL_V1 + "/teacherProfile")
+    Call<JsonObject> updateProfile(@Query("user_id") String userId, @Query("token") String token, @Body TeacherProfileReq teacherProfileReq);
+
     @GET(URL_V1 + "/studentProfile/classes")
     Call<StudentRes> getStudentsClass(@Query("token") String token, @Query("class_id") int classid);
-
-    @POST(PRE_URL + "/teacher")
-    Call<JsonObject> updateProfile(@Query("user_id") String userId);
 
     @GET(URL_V1 + "/notification")
     Call<NotificationRes> getNotifications(@Query("token") String token);

@@ -1,5 +1,6 @@
 package com.salsal.school.teacher.view.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.model.TeacherProfileRes;
+import com.salsal.school.teacher.view.Activities.ActivityEditProfile;
 import com.salsal.school.teacher.view.BaseActivity;
 import com.salsal.school.teacher.view.BaseFragment;
 
@@ -82,7 +84,7 @@ public class FragmentProfile extends BaseFragment {
         fabEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), ActivityEditProfile.class));
             }
         });
         return view;

@@ -28,6 +28,7 @@
         <activity android:name=".view.Activities.ActivityActivities" />
         <activity android:name=".view.Activities.ActivityTaskNew" />
         <activity android:name=".view.Activities.ActivityAttendance" />
+        <activity android:name=".view.Activities.ActivityEditProfile" />
         <activity
             android:name=".view.Activities.ActivityLoading"
             android:theme="@style/Theme.AppCompat.Translucent"></activity>
