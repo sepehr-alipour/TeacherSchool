@@ -29,7 +29,7 @@ public class WebServiceHelper {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PreferenceManager.BASE_URL)
+                .baseUrl(PreferenceManager.getUrl())
                 //  .client(okClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

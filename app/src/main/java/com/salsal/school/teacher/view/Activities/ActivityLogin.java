@@ -17,6 +17,7 @@ import com.salsal.school.teacher.model.LoginReq;
 import com.salsal.school.teacher.model.LoginRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
 import com.salsal.school.teacher.view.BaseActivity;
+import com.salsal.school.teacher.view.Fragments.FragmentAddSchool;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
@@ -27,7 +28,7 @@ import retrofit2.Response;
  * Created by Sepehr on 12/4/2017.
  */
 
-public class ActivityLogin extends BaseActivity {
+public class ActivityLogin extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.imageView)
     ImageView imageView;
     @BindView(R.id.edtUsername)
@@ -36,42 +37,76 @@ public class ActivityLogin extends BaseActivity {
     AppCompatEditText edtPassword;
     @BindView(R.id.btnLogin)
     AppCompatButton btnLogin;
+    @BindView(R.id.edtUrl)
+    AppCompatEditText edtUrl;
+    @BindView(R.id.edtSchoolName)
+    AppCompatEditText edtSchoolName;
+    private boolean inEdit = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        edtPassword.setText("123");
-        edtUsername.setText("teacher");
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(edtPassword.getText().toString()) ||
-                        TextUtils.isEmpty(edtUsername.getText().toString())) {
+        btnLogin.setOnClickListener(this);
 
-                    Toast.makeText(ActivityLogin.this, getString(R.string.toast_empty_edittext), Toast.LENGTH_SHORT).show();
-                } else {
-                    LoginReq loginReq = new LoginReq();
-                    loginReq.setUsername(edtUsername.getText().toString());
-                    loginReq.setPassword(edtPassword.getText().toString());
-                    WebServiceHelper.get(ActivityLogin.this).loginUser(loginReq).enqueue(new CallbackHandler<LoginRes>(ActivityLogin.this, true, true) {
-                        @Override
-                        public void onSuccess(Response<LoginRes> response) {
-                            PreferenceManager.SaveUserProfile(ActivityLogin.this, response.body().getData().getUserId(), response.body().getData().getToken());
-                            startActivity(new Intent(ActivityLogin.this, ActivityMain.class));
-                            finish();
-                        }
+        LoginReq schoolConnection = PreferenceManager.getSchoolConnection(getIntent().getIntExtra(FragmentAddSchool.INTENT_KEY_SCHOOL_ID, -1));
+        if (schoolConnection != null) {
+            inEdit = true;
+            edtPassword.setText(schoolConnection.getPassword());
+            edtUsername.setText(schoolConnection.getUsername());
+            edtUrl.setText(schoolConnection.getConnectionUrl());
+            edtSchoolName.setText(schoolConnection.getSchoolName());
+        }
+    }
 
-                        @Override
-                        public void onFailed(APIErrorResult errorResult) {
-                            Toast.makeText(ActivityLogin.this, errorResult.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+    @Override
+    public void onClick(View v) {
 
-                }
+
+        if (TextUtils.isEmpty(edtPassword.getText().toString()) ||
+                TextUtils.isEmpty(edtUsername.getText().toString()) ||
+                TextUtils.isEmpty(edtUrl.getText().toString()) ||
+                TextUtils.isEmpty(edtUsername.getText().toString())) {
+
+            Toast.makeText(ActivityLogin.this, getString(R.string.toast_empty_edittext), Toast.LENGTH_SHORT).show();
+        } else {
+            final LoginReq loginReq = new LoginReq();
+            loginReq.setUsername(edtUsername.getText().toString());
+            loginReq.setPassword(edtPassword.getText().toString());
+            loginReq.setConnectionUrl(edtUrl.getText().toString());
+            loginReq.setSchoolName(edtSchoolName.getText().toString());
+            if (inEdit) {
+                int id = getIntent().getIntExtra(FragmentAddSchool.INTENT_KEY_SCHOOL_ID, -1);
+                loginReq.setId(PreferenceManager.getSchoolConnection(id).getId());
+                loginReq.setChecked(PreferenceManager.getSchoolConnection(id).isChecked());
+                PreferenceManager.updateSchoolConnection(loginReq);
+
+                setResult(RESULT_OK);
+                finish();
+            } else {
+
+                loginReq.setId(PreferenceManager.getSchoolConnections().size() + 1);
+                loginReq.setChecked(true);
+                PreferenceManager.addSchoolConnection(loginReq);
+                WebServiceHelper.get(ActivityLogin.this).loginUser(loginReq).enqueue(new CallbackHandler<LoginRes>(ActivityLogin.this, true, true) {
+                    @Override
+                    public void onSuccess(Response<LoginRes> response) {
+                        PreferenceManager.SaveUserProfile(ActivityLogin.this, response.body().getData().getUserId(), response.body().getData().getToken());
+                        Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailed(APIErrorResult errorResult) {
+                        
+                        Toast.makeText(ActivityLogin.this, errorResult.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
+        }
 
     }
 }

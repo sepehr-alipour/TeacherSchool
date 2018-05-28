@@ -31,7 +31,8 @@
         <activity android:name=".view.Activities.ActivityEditProfile" />
         <activity
             android:name=".view.Activities.ActivityLoading"
-            android:theme="@style/Theme.AppCompat.Translucent"></activity>
+            android:theme="@style/Theme.AppCompat.Translucent" />
+        <activity android:name=".view.Fragments.FragmentAddSchool"></activity>
     </application>
 
 </manifest>

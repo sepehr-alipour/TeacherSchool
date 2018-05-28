@@ -3,6 +3,10 @@ package com.salsal.school.teacher.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.orhanobut.hawk.Hawk;
+import com.salsal.school.teacher.model.LoginReq;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -13,11 +17,12 @@ import static android.content.Context.MODE_PRIVATE;
 public class PreferenceManager {
     private static PreferenceManager ourInstance = new PreferenceManager();
     public static final String BASE_URL = "http://192.168.2.119:80";
-   // public static final String BASE_URL = "http://192.168.1.12:80";
+    // public static final String BASE_URL = "http://192.168.1.12:80";
     //public static final String BASE_URL = "http://192.168.43.114:80";
     public static final int PER_PAGE = 10;
     private static final String PRE_USER_PROFILE = "user_profile";
     public static final String PREF_TOKEN = "token";
+    public static final String PREF_SCHOOL_CONNECTION = "connections";
     public static final String PREF_ID = "id";
     public static final String PREF_COURSE_ID = "course_id";
     public static final String PREF_CLASS_ID = "class_id";
@@ -29,6 +34,59 @@ public class PreferenceManager {
     private PreferenceManager() {
     }
 
+    public static void addSchoolConnection(LoginReq schoolConnection) {
+
+        ArrayList<LoginReq> schoolConnections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
+        for (LoginReq school : schoolConnections) {
+            school.setChecked(false);
+        }
+        for (int i = 0; i < schoolConnections.size(); i++) {
+            if (schoolConnections.get(i).getConnectionUrl().equalsIgnoreCase(schoolConnection.getConnectionUrl())) {
+                schoolConnections.remove(i);
+                schoolConnections.add(i, schoolConnection);
+                Hawk.put(PREF_SCHOOL_CONNECTION, schoolConnections);
+                return;
+            }
+        }
+        schoolConnections.add(schoolConnection);
+        Hawk.put(PREF_SCHOOL_CONNECTION, schoolConnections);
+
+    }
+
+    public static String getUrl() {
+        ArrayList<LoginReq> conncections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
+        for (LoginReq loginReq : conncections) {
+            if (loginReq.isChecked())
+                return "http://" + loginReq.getConnectionUrl();
+        }
+        return null;
+    }
+
+    public static void updateSchoolConnection(LoginReq schoolConnection) {
+        ArrayList<LoginReq> schoolConnections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
+        for (int i = 0; i < schoolConnections.size(); i++) {
+            if (schoolConnections.get(i).getId() == schoolConnection.getId()) {
+                schoolConnections.remove(i);
+                schoolConnections.add(i, schoolConnection);
+                Hawk.put(PREF_SCHOOL_CONNECTION, schoolConnections);
+                return;
+            }
+        }
+    }
+
+    public static LoginReq getSchoolConnection(int id) {
+        ArrayList<LoginReq> schoolConnections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
+        for (int i = 0; i < schoolConnections.size(); i++) {
+            if (schoolConnections.get(i).getId() == id) {
+                return schoolConnections.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<LoginReq> getSchoolConnections() {
+        return Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
+    }
 
     public static void SaveUserProfile(Context context, String id, String token) {
         SharedPreferences.Editor editor = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE).edit();

@@ -24,7 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.model.TeacherProfileRes;
 import com.salsal.school.teacher.view.Activities.ActivityEditProfile;
-import com.salsal.school.teacher.view.BaseActivity;
+import com.salsal.school.teacher.view.Activities.ActivityLogin;
 import com.salsal.school.teacher.view.BaseFragment;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ import retrofit2.Response;
  * Created by Taraabar on 12/16/2016.
  */
 
-public class FragmentProfile extends BaseFragment {
+public class FragmentProfile extends BaseFragment implements View.OnClickListener {
 
 
     @BindView(R.id.profile_image)
@@ -81,12 +81,7 @@ public class FragmentProfile extends BaseFragment {
         unbinder = ButterKnife.bind(this, view);
         initInstances();
         setupViewPager(viewPager);
-        fabEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), ActivityEditProfile.class));
-            }
-        });
+        fabEdit.setOnClickListener(this);
         return view;
     }
 
@@ -102,6 +97,7 @@ public class FragmentProfile extends BaseFragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(FragmentProfileDetail.newInstance("", ""), "مشخصات کلی");
         adapter.addFrag(FragmentProfileSchedule.newInstance("", ""), "برنامه هفتگی");
+        adapter.addFrag(FragmentAddSchool.newInstance("", ""), "لیست مدارس");
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -111,9 +107,20 @@ public class FragmentProfile extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1)
-                    fabEdit.hide();
-                else fabEdit.show();
+                switch (position) {
+                    case 0:
+                        fabEdit.show();
+                        fabEdit.setImageResource(R.drawable.ic_action_edit);
+                        break;
+                    case 1:
+                        fabEdit.hide();
+
+                        break;
+                    case 2:
+                        fabEdit.show();
+                        fabEdit.setImageResource(R.drawable.ic_action_add);
+                        break;
+                }
             }
 
             @Override
@@ -132,6 +139,23 @@ public class FragmentProfile extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (viewPager.getCurrentItem()) {
+            case 0:
+                startActivity(new Intent(getContext(), ActivityEditProfile.class));
+
+                break;
+            case 2:
+
+                Intent intent = new Intent(getContext(), ActivityLogin.class);
+                startActivity(intent);
+                break;
+
+        }
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {

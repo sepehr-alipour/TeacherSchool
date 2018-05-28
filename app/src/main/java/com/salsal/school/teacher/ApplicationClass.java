@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.orhanobut.hawk.Hawk;
 import com.salsal.school.teacher.utils.LocaleManager;
 
 /**
@@ -14,6 +15,8 @@ public class ApplicationClass extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Hawk.init(getApplicationContext()).build();
+
        /* Configuration configuration = getResources().getConfiguration();
         configuration.setLayoutDirection(new Locale("fa"));
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());*/
