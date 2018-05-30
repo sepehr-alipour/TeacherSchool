@@ -101,7 +101,7 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
 
                     @Override
                     public void onFailed(APIErrorResult errorResult) {
-                        
+                        PreferenceManager.removeSchoolConnection(loginReq);
                         Toast.makeText(ActivityLogin.this, errorResult.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

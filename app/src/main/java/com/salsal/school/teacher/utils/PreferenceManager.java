@@ -34,6 +34,17 @@ public class PreferenceManager {
     private PreferenceManager() {
     }
 
+    public static void removeSchoolConnection(LoginReq schoolConnection) {
+        ArrayList<LoginReq> schoolConnections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
+        for (int i = 0; i < schoolConnections.size(); i++) {
+            if (schoolConnections.get(i).getId() == schoolConnection.getId()) {
+                schoolConnections.remove(i);
+                Hawk.put(PREF_SCHOOL_CONNECTION, schoolConnections);
+                return;
+            }
+        }
+    }
+
     public static void addSchoolConnection(LoginReq schoolConnection) {
 
         ArrayList<LoginReq> schoolConnections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
