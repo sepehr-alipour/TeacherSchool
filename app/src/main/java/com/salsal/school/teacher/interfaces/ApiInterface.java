@@ -33,8 +33,6 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
 
-    // String PRE_URL = "api.salsal.local";
-    String PRE_URL = "192.168.43.114:80";
     String URL_V1 = "/api/v1";
 
     @POST(URL_V1 + "/user/signin")

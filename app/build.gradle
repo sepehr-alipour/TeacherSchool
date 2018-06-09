@@ -10,6 +10,14 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+
+            resValue "string", "BASE_URL", "192.168.2.119:80"
+            resValue "string", "SCHOOL_NAME", "test"
+            resValue "string", "USER_NAME", "teacher"
+            resValue "string", "PASSWORD", "123"
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
