@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.model.TeacherProfileRes;
+import com.salsal.school.teacher.view.Activities.ActivityAddSchool;
 import com.salsal.school.teacher.view.Activities.ActivityEditProfile;
 import com.salsal.school.teacher.view.Activities.ActivityLogin;
 import com.salsal.school.teacher.view.BaseFragment;
@@ -97,7 +98,7 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(FragmentProfileDetail.newInstance("", ""), "مشخصات کلی");
         adapter.addFrag(FragmentProfileSchedule.newInstance("", ""), "برنامه هفتگی");
-        adapter.addFrag(FragmentAddSchool.newInstance("", ""), "لیست مدارس");
+        adapter.addFrag(ActivityAddSchool.newInstance("", ""), "لیست مدارس");
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

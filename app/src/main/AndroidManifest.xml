@@ -32,7 +32,7 @@
         <activity
             android:name=".view.Activities.ActivityLoading"
             android:theme="@style/Theme.AppCompat.Translucent" />
-        <activity android:name=".view.Fragments.FragmentAddSchool"></activity>
+        <activity android:name=".view.Activities.ActivityAddSchool"></activity>
     </application>
 
 </manifest>
