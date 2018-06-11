@@ -11,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.webservice.APIErrorResult;
+import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.LoginReq;
 import com.salsal.school.teacher.model.LoginRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
 import com.salsal.school.teacher.view.BaseActivity;
-import com.salsal.school.teacher.view.Fragments.FragmentAddSchool;
 import com.salsal.school.teacher.webservice.WebServiceHelper;
 
 import butterknife.BindView;
@@ -50,7 +49,7 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
         ButterKnife.bind(this);
         btnLogin.setOnClickListener(this);
 
-        LoginReq schoolConnection = PreferenceManager.getSchoolConnection(getIntent().getIntExtra(FragmentAddSchool.INTENT_KEY_SCHOOL_ID, -1));
+        LoginReq schoolConnection = PreferenceManager.getSchoolConnection(getIntent().getIntExtra(ActivityAddSchool.INTENT_KEY_SCHOOL_ID, -1));
         if (schoolConnection != null) {
             inEdit = true;
             edtPassword.setText(schoolConnection.getPassword());
@@ -77,7 +76,7 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
             loginReq.setConnectionUrl(edtUrl.getText().toString());
             loginReq.setSchoolName(edtSchoolName.getText().toString());
             if (inEdit) {
-                int id = getIntent().getIntExtra(FragmentAddSchool.INTENT_KEY_SCHOOL_ID, -1);
+                int id = getIntent().getIntExtra(ActivityAddSchool.INTENT_KEY_SCHOOL_ID, -1);
                 loginReq.setId(PreferenceManager.getSchoolConnection(id).getId());
                 loginReq.setChecked(PreferenceManager.getSchoolConnection(id).isChecked());
                 PreferenceManager.updateSchoolConnection(loginReq);

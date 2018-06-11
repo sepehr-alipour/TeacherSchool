@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterStudents;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.webservice.APIErrorResult;
+import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnSwitchSelectListener;
 import com.salsal.school.teacher.model.AttendanceReq;
 import com.salsal.school.teacher.model.AttendanceRes;

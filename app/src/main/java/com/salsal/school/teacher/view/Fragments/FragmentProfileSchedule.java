@@ -1,7 +1,6 @@
 package com.salsal.school.teacher.view.Fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterSchedule;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.webservice.APIErrorResult;
+import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.ScheduleRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
 import com.salsal.school.teacher.view.BaseFragment;

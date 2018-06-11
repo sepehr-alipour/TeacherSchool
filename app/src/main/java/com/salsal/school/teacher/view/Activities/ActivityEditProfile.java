@@ -2,7 +2,6 @@ package com.salsal.school.teacher.view.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -13,9 +12,8 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.ApiInterface;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.webservice.APIErrorResult;
+import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.TeacherProfileReq;
 import com.salsal.school.teacher.model.TeacherProfileRes;
 import com.salsal.school.teacher.utils.PreferenceManager;

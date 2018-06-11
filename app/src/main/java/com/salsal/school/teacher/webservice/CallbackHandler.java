@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.interfaces;
+package com.salsal.school.teacher.webservice;
 
 import android.content.Context;
 import android.content.Intent;

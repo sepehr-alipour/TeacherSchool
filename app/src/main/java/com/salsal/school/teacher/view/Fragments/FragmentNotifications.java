@@ -3,7 +3,6 @@ package com.salsal.school.teacher.view.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +13,8 @@ import android.widget.LinearLayout;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterNofits;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.webservice.APIErrorResult;
+import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnNotifClickListener;
 import com.salsal.school.teacher.model.NotificationRes;
 import com.salsal.school.teacher.utils.PreferenceManager;

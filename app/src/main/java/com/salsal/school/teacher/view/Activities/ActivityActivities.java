@@ -12,8 +12,8 @@ import android.view.View;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterActivities;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.webservice.APIErrorResult;
+import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnDataSelectListener;
 import com.salsal.school.teacher.model.ActivityRes;
 import com.salsal.school.teacher.utils.PreferenceManager;

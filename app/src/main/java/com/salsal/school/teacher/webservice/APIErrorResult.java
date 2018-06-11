@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.interfaces;
+package com.salsal.school.teacher.webservice;
 
 import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;

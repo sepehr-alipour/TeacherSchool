@@ -1,7 +1,6 @@
 package com.salsal.school.teacher.view.Activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
@@ -9,8 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.interfaces.APIErrorResult;
-import com.salsal.school.teacher.interfaces.CallbackHandler;
+import com.salsal.school.teacher.webservice.APIErrorResult;
+import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.NotificationDetailRes;
 import com.salsal.school.teacher.utils.PreferenceManager;
 import com.salsal.school.teacher.view.BaseActivity;
