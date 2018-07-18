@@ -36,10 +36,6 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
     AppCompatEditText edtPassword;
     @BindView(R.id.btnLogin)
     AppCompatButton btnLogin;
-    @BindView(R.id.edtUrl)
-    AppCompatEditText edtUrl;
-    @BindView(R.id.edtSchoolName)
-    AppCompatEditText edtSchoolName;
     private boolean inEdit = false;
 
     @Override
@@ -54,8 +50,6 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
             inEdit = true;
             edtPassword.setText(schoolConnection.getPassword());
             edtUsername.setText(schoolConnection.getUsername());
-            edtUrl.setText(schoolConnection.getConnectionUrl());
-            edtSchoolName.setText(schoolConnection.getSchoolName());
         }
     }
 
@@ -65,16 +59,13 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
 
         if (TextUtils.isEmpty(edtPassword.getText().toString()) ||
                 TextUtils.isEmpty(edtUsername.getText().toString()) ||
-                TextUtils.isEmpty(edtUrl.getText().toString()) ||
                 TextUtils.isEmpty(edtUsername.getText().toString())) {
 
             Toast.makeText(ActivityLogin.this, getString(R.string.toast_empty_edittext), Toast.LENGTH_SHORT).show();
         } else {
-            final LoginReq loginReq = new LoginReq();
+            final LoginReq loginReq = PreferenceManager.getSchoolConnection(PreferenceManager.getSchoolConnections().size());
             loginReq.setUsername(edtUsername.getText().toString());
             loginReq.setPassword(edtPassword.getText().toString());
-            loginReq.setConnectionUrl(edtUrl.getText().toString());
-            loginReq.setSchoolName(edtSchoolName.getText().toString());
             if (inEdit) {
                 int id = getIntent().getIntExtra(ActivityAddSchool.INTENT_KEY_SCHOOL_ID, -1);
                 loginReq.setId(PreferenceManager.getSchoolConnection(id).getId());
@@ -85,9 +76,8 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
                 finish();
             } else {
 
-                loginReq.setId(PreferenceManager.getSchoolConnections().size() + 1);
                 loginReq.setChecked(true);
-                PreferenceManager.addSchoolConnection(loginReq);
+                PreferenceManager.updateSchoolConnection(loginReq);
                 WebServiceHelper.get(ActivityLogin.this).loginUser(loginReq).enqueue(new CallbackHandler<LoginRes>(ActivityLogin.this, true, true) {
                     @Override
                     public void onSuccess(Response<LoginRes> response) {

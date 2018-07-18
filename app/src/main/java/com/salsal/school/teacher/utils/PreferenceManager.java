@@ -45,7 +45,7 @@ public class PreferenceManager {
         }
     }
 
-    public static void addSchoolConnection(LoginReq schoolConnection) {
+    public static boolean addSchoolConnection(LoginReq schoolConnection) {
 
         ArrayList<LoginReq> schoolConnections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
         for (LoginReq school : schoolConnections) {
@@ -53,22 +53,22 @@ public class PreferenceManager {
         }
         for (int i = 0; i < schoolConnections.size(); i++) {
             if (schoolConnections.get(i).getConnectionUrl().equalsIgnoreCase(schoolConnection.getConnectionUrl())) {
-                schoolConnections.remove(i);
+             /*   schoolConnections.remove(i);
                 schoolConnections.add(i, schoolConnection);
-                Hawk.put(PREF_SCHOOL_CONNECTION, schoolConnections);
-                return;
+                Hawk.put(PREF_SCHOOL_CONNECTION, schoolConnections);*/
+                return false;
             }
         }
         schoolConnections.add(schoolConnection);
         Hawk.put(PREF_SCHOOL_CONNECTION, schoolConnections);
-
+        return true;
     }
 
     public static String getUrl() {
         ArrayList<LoginReq> conncections = Hawk.get(PREF_SCHOOL_CONNECTION, new ArrayList<LoginReq>());
         for (LoginReq loginReq : conncections) {
             if (loginReq.isChecked())
-                return "http://" + loginReq.getConnectionUrl();
+                return loginReq.getConnectionUrl();
         }
         return null;
     }

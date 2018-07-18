@@ -3,6 +3,7 @@ package com.salsal.school.teacher.webservice;
 import android.content.Context;
 
 
+import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.interfaces.ApiInterface;
 import com.salsal.school.teacher.utils.PreferenceManager;
 
@@ -40,7 +41,7 @@ public class WebServiceHelper {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PreferenceManager.getUrl())
+                .baseUrl(PreferenceManager.getUrl() != null ? PreferenceManager.getUrl() : context.getString(R .string.BASE_URL))
                 //  .client(okClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
