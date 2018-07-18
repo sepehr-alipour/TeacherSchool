@@ -21,6 +21,17 @@ public class WebServiceHelper {
     private WebServiceHelper() {
     }
 
+    public static ApiInterface get(String url) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                //  .client(okClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(ApiInterface.class);
+    }
+
     public static ApiInterface get(Context context) {
         OkHttpClient okClient = new OkHttpClient.Builder()
                 .connectTimeout(40, TimeUnit.SECONDS)

@@ -17,11 +17,7 @@
         <activity
             android:name=".view.Activities.ActivityLogin"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.Activities.ActivityNotifDetail" />
         <activity android:name=".view.Activities.ActivityNotificationNew" />
@@ -29,6 +25,13 @@
         <activity android:name=".view.Activities.ActivityTaskNew" />
         <activity android:name=".view.Activities.ActivityAttendance" />
         <activity android:name=".view.Activities.ActivityEditProfile" />
+        <activity android:name=".view.Activities.ActivitySchools">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.Activities.ActivityLoading"
             android:theme="@style/Theme.AppCompat.Translucent" />

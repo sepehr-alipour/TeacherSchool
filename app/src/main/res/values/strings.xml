@@ -18,6 +18,8 @@
     <string name="tab_students">دانش آموزان</string>
     <string name="tab_notifications">اعلانات</string>
     <string name="toast_empty_edittext">لطفا نام کاربری و رمز عبور خود را وارد کنید</string>
+    <string name="toast_error_school">لطفا مدرسه خود را انتخاب کنید</string>
+    <string name="toast_warning_duplicate_school">این مدرسه قبلا ثبت شده است</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">profile</string>
     <string name="priority">زنگ %1$d</string>

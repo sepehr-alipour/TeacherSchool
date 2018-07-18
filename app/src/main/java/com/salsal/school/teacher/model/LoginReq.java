@@ -16,6 +16,8 @@ public class LoginReq {
     private String password;
     String schoolName;
     String connectionUrl;
+    String schoolLogo;
+    boolean isChecked;
     int id;
 
     public int getId() {
@@ -34,7 +36,13 @@ public class LoginReq {
         isChecked = checked;
     }
 
-    boolean isChecked;
+    public String getSchoolLogo() {
+        return schoolLogo;
+    }
+
+    public void setSchoolLogo(String schoolLogo) {
+        this.schoolLogo = schoolLogo;
+    }
 
     public String getSchoolName() {
         return schoolName;

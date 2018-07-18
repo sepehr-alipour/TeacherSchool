@@ -12,11 +12,14 @@ import com.salsal.school.teacher.model.CourseRes;
 import com.salsal.school.teacher.model.LoginReq;
 import com.salsal.school.teacher.model.LoginRes;
 import com.salsal.school.teacher.model.ScheduleRes;
+import com.salsal.school.teacher.model.SchoolListRes;
 import com.salsal.school.teacher.model.SendNotificationReq;
 import com.salsal.school.teacher.model.NotificationDetailRes;
 import com.salsal.school.teacher.model.StudentRes;
 import com.salsal.school.teacher.model.TeacherProfileReq;
 import com.salsal.school.teacher.model.TeacherProfileRes;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -77,4 +80,8 @@ public interface ApiInterface {
 
     @POST(URL_V1 + "/notification")
     Call<NotificationDetailRes> sendNotification(@Query("token") String token, @Body SendNotificationReq sendNotificationReq);
+
+    @GET(URL_V1 + "/schools/name")
+    Call<List<SchoolListRes>> getSchools(@Query("query") String query);
+
 }
