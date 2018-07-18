@@ -3,9 +3,10 @@ package com.salsal.school.teacher.model;
 import com.google.gson.annotations.SerializedName;
 
 public class TeacherProfileRes {
+
     /**
      * msg : ok
-     * data : {"id":1,"education":"لیسنانس","name":"سپهر علی پور","birth_date":"17/11/1370","image_url":"http://media.jamnews.ir/medium1/1392/04/22/IMG12432009.jpeg","rate":"3","email":"alipour.dev@gmail.com","phone_number":"09363531363","national_code":"4900191051","user_id":1,"created_at":"2018-05-12 11:03:21","updated_at":"2018-05-12 11:03:21"}
+     * data : {"id":2,"education":null,"name":"saeed","birth_date":null,"image_url":"https://pickaface.net/gallery/avatar/unr_paii_180627_0934_vpwcm.png","rate":null,"email":null,"phone_number":null,"national_code":null,"user_id":2,"created_at":"2018-05-23 15:16:00","updated_at":"2018-05-23 15:16:00"}
      */
 
     @SerializedName("msg")
@@ -31,18 +32,18 @@ public class TeacherProfileRes {
 
     public static class DataBean {
         /**
-         * id : 1
-         * education : لیسنانس
-         * name : سپهر علی پور
-         * birth_date : 17/11/1370
-         * image_url : http://media.jamnews.ir/medium1/1392/04/22/IMG12432009.jpeg
-         * rate : 3
-         * email : alipour.dev@gmail.com
-         * phone_number : 09363531363
-         * national_code : 4900191051
-         * user_id : 1
-         * created_at : 2018-05-12 11:03:21
-         * updated_at : 2018-05-12 11:03:21
+         * id : 2
+         * education : null
+         * name : saeed
+         * birth_date : null
+         * image_url : https://pickaface.net/gallery/avatar/unr_paii_180627_0934_vpwcm.png
+         * rate : null
+         * email : null
+         * phone_number : null
+         * national_code : null
+         * user_id : 2
+         * created_at : 2018-05-23 15:16:00
+         * updated_at : 2018-05-23 15:16:00
          */
 
         @SerializedName("id")
@@ -56,7 +57,7 @@ public class TeacherProfileRes {
         @SerializedName("image_url")
         private String imageUrl;
         @SerializedName("rate")
-        private int rate;
+        private float rate;
         @SerializedName("email")
         private String email;
         @SerializedName("phone_number")
@@ -110,11 +111,11 @@ public class TeacherProfileRes {
             this.imageUrl = imageUrl;
         }
 
-        public int getRate() {
+        public float getRate() {
             return rate;
         }
 
-        public void setRate(int rate) {
+        public void setRate(float rate) {
             this.rate = rate;
         }
 

@@ -20,7 +20,7 @@ public class PreferenceManager {
     // public static final String BASE_URL = "http://192.168.1.12:80";
     //public static final String BASE_URL = "http://192.168.43.114:80";
     public static final int PER_PAGE = 10;
-    private static final String PRE_USER_PROFILE = "user_profile";
+    private static final String PRE_USER_PROFILE = "user_profile_teacher";
     public static final String PREF_TOKEN = "token";
     public static final String PREF_SCHOOL_CONNECTION = "connections";
     public static final String PREF_ID = "id";
