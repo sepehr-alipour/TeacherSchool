@@ -77,7 +77,7 @@ public class ActivityEditProfile extends BaseActivity implements View.OnClickLis
                 teacherProfileReq.setBirthDate(edtBirthday.getText().toString());
                 teacherProfileReq.setEmail(edtEmail.getText().toString());
                 teacherProfileReq.setPhoneNumber(edtPhone.getText().toString());
-
+                //todo edit response failed for nationalcode and name
                 WebServiceHelper.get(ActivityEditProfile.this).updateProfile(PreferenceManager.getUserProfile(ActivityEditProfile.this).get(PreferenceManager.PREF_USER_ID),
                         PreferenceManager.getUserProfile(ActivityEditProfile.this).get(PreferenceManager.PREF_TOKEN)
                         , teacherProfileReq).enqueue(new CallbackHandler<JsonObject>(ActivityEditProfile.this, true, true) {

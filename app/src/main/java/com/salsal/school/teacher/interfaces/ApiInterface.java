@@ -73,7 +73,7 @@ public interface ApiInterface {
     @GET(URL_V1 + "/notification/sentBox")
     Call<NotificationRes> getSentBoxNotifications(@Query("token") String token);
 
-    @GET(URL_V1 + "/schedule")
+    @GET(URL_V1 + "/schedule/teacher")
     Call<ScheduleRes> getTeacherSchedule(@Query("token") String token);
 
     @GET(URL_V1 + "/notification/{id}")
