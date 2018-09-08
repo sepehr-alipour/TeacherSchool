@@ -25,6 +25,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -60,8 +61,8 @@ public interface ApiInterface {
     @GET(URL_V1 + "/teacherProfile/courses")
     Call<CourseRes> getTecherCourses(@Query("token") String token);
 
-    @POST(URL_V1 + "/teacherProfile")
-    Call<JsonObject> updateProfile(@Query("user_id") String userId, @Query("token") String token, @Body TeacherProfileReq teacherProfileReq);
+    @PUT(URL_V1 + "/teacherProfile/{id}")
+    Call<JsonObject> updateProfile(@Path("id") String userId, @Query("token") String token, @Body TeacherProfileReq teacherProfileReq);
 
     @GET(URL_V1 + "/studentProfile/classes")
     Call<StudentRes> getStudentsClass(@Query("token") String token, @Query("class_id") int classid);

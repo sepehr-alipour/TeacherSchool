@@ -29,7 +29,6 @@ import butterknife.Unbinder;
 import retrofit2.Response;
 
 public class FragmentNotifications extends BaseFragment implements OnNotifClickListener, View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -45,7 +44,6 @@ public class FragmentNotifications extends BaseFragment implements OnNotifClickL
     @BindView(R.id.tabLayout)
     LinearLayout tabLayout;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -111,7 +109,7 @@ public class FragmentNotifications extends BaseFragment implements OnNotifClickL
 
     @Override
     public void clicked(NotificationRes.DataBean notification) {
-        if ((notification.getUserId() + "").equalsIgnoreCase(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_ID))) {
+        if ((notification.getUserId() + "").equalsIgnoreCase(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_USER_ID))) {
             return;
         }
         Intent intent = new Intent(getContext(), ActivityNotifDetail.class);

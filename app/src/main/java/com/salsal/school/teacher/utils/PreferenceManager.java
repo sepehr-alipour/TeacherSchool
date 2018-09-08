@@ -22,8 +22,8 @@ public class PreferenceManager {
     public static final int PER_PAGE = 10;
     private static final String PRE_USER_PROFILE = "user_profile_teacher";
     public static final String PREF_TOKEN = "token";
+    public static final String PREF_USER_ID = "user_id";
     public static final String PREF_SCHOOL_CONNECTION = "connections";
-    public static final String PREF_ID = "id";
     public static final String PREF_COURSE_ID = "course_id";
     public static final String PREF_CLASS_ID = "class_id";
 
@@ -102,7 +102,7 @@ public class PreferenceManager {
     public static void SaveUserProfile(Context context, String id, String token) {
         SharedPreferences.Editor editor = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE).edit();
         editor.putString(PREF_TOKEN, token);
-        editor.putString(PREF_ID, id);
+        editor.putString(PREF_USER_ID, id);
         editor.apply();
     }
 
@@ -132,8 +132,8 @@ public class PreferenceManager {
     public static HashMap<String, String> getUserProfile(Context context) {
         HashMap<String, String> profile = new HashMap<>();
         SharedPreferences prefs = context.getSharedPreferences(PRE_USER_PROFILE, MODE_PRIVATE);
-        profile.put(PREF_ID, prefs.getString(PREF_ID, ""));
-        profile.put(PREF_TOKEN, prefs.getString(PREF_TOKEN, ""));
+        profile.put(PREF_USER_ID, prefs.getString(PREF_USER_ID, null));
+        profile.put(PREF_TOKEN, prefs.getString(PREF_TOKEN, null));
         return profile;
     }
 

@@ -24,7 +24,6 @@ import butterknife.Unbinder;
 import retrofit2.Response;
 
 public class FragmentProfileDetail extends BaseFragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -46,7 +45,6 @@ public class FragmentProfileDetail extends BaseFragment implements View.OnClickL
     @BindView(R.id.list)
     NestedScrollView list;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -88,18 +86,20 @@ public class FragmentProfileDetail extends BaseFragment implements View.OnClickL
 
         View view = inflater.inflate(R.layout.fragment_profile_details, container, false);
         unbinder = ButterKnife.bind(this, view);
-        WebServiceHelper.get(getContext()).getTeacherProfile(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_ID)
+        WebServiceHelper.get(getContext()).getTeacherProfile(PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_USER_ID)
                 , PreferenceManager.getUserProfile(getContext()).get(PreferenceManager.PREF_TOKEN))
                 .enqueue(new CallbackHandler<TeacherProfileRes>(getContext(), true, true) {
                     @Override
                     public void onSuccess(Response<TeacherProfileRes> response) {
-                        txtBirthday.setText(response.body().getData().getBirthDate());
-                        txtEducation.setText(response.body().getData().getEducation());
-                        txtEmail.setText(response.body().getData().getEmail());
-                        txtMobile.setText(response.body().getData().getPhoneNumber());
-                        txtNationalCode.setText(response.body().getData().getNationalCode());
-                        ratingBar.setRating(response.body().getData().getRate());
-                        ((FragmentProfile) getParentFragment()).dataLoaded(response);
+                        if (isAdded()) {
+                            txtBirthday.setText(response.body().getData().getBirthDate());
+                            txtEducation.setText(response.body().getData().getEducation());
+                            txtEmail.setText(response.body().getData().getEmail());
+                            txtMobile.setText(response.body().getData().getPhoneNumber());
+                            txtNationalCode.setText(response.body().getData().getNationalCode());
+                            ratingBar.setRating(response.body().getData().getRate());
+                            ((FragmentProfile) getParentFragment()).dataLoaded(response);
+                        }
                     }
 
                     @Override

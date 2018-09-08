@@ -51,7 +51,7 @@ public class ActivityEditProfile extends BaseActivity implements View.OnClickLis
         toolbar.setTitle("ویرایش مشخصات");
         btnSend.setOnClickListener(this);
         edtBirthday.setOnClickListener(this);
-        WebServiceHelper.get(this).getTeacherProfile(PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_ID), PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_TOKEN))
+        WebServiceHelper.get(this).getTeacherProfile(PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_USER_ID), PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_TOKEN))
                 .enqueue(new CallbackHandler<TeacherProfileRes>(this, true, true) {
                     @Override
                     public void onSuccess(Response<TeacherProfileRes> response) {
@@ -78,7 +78,7 @@ public class ActivityEditProfile extends BaseActivity implements View.OnClickLis
                 teacherProfileReq.setEmail(edtEmail.getText().toString());
                 teacherProfileReq.setPhoneNumber(edtPhone.getText().toString());
 
-                WebServiceHelper.get(ActivityEditProfile.this).updateProfile(PreferenceManager.getUserProfile(ActivityEditProfile.this).get(PreferenceManager.PREF_ID),
+                WebServiceHelper.get(ActivityEditProfile.this).updateProfile(PreferenceManager.getUserProfile(ActivityEditProfile.this).get(PreferenceManager.PREF_USER_ID),
                         PreferenceManager.getUserProfile(ActivityEditProfile.this).get(PreferenceManager.PREF_TOKEN)
                         , teacherProfileReq).enqueue(new CallbackHandler<JsonObject>(ActivityEditProfile.this, true, true) {
                     @Override

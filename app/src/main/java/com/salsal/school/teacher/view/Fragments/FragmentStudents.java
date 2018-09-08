@@ -30,7 +30,6 @@ import butterknife.Unbinder;
 
 
 public class FragmentStudents extends BaseFragment implements OnViewClickListener, OnDataSelectListener {
-    // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private final int TYPE_ATTENDANCE = 0;
@@ -61,7 +60,6 @@ public class FragmentStudents extends BaseFragment implements OnViewClickListene
      * @param param2 Parameter 2.
      * @return A new instance of fragment FragmentProfileDetail.
      */
-    // TODO: Rename and change types and number of parameters
     public static FragmentStudents newInstance(String param1, String param2) {
         FragmentStudents fragment = new FragmentStudents();
         Bundle args = new Bundle();
