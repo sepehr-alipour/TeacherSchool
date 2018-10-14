@@ -32,7 +32,7 @@
         android:layout_height="38dp"
         android:layout_gravity="center_vertical"
         android:background="@drawable/shape_blue_blank"
-        android:text="حاضر" />
+        android:text="@string/btn_alive" />
 
     <Button
         android:id="@+id/btnAbsent"
@@ -41,5 +41,14 @@
         android:layout_gravity="center_vertical"
 
         android:background="@drawable/shape_blue_blank"
-        android:text="غایب" />
+        android:text="@string/btn_absent" />
+
+    <Button
+        android:id="@+id/btnLate"
+        android:layout_width="45dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/shape_blue_blank"
+        android:text="@string/btn_late" />
+
 </LinearLayout>

@@ -2,7 +2,7 @@ package com.salsal.school.teacher.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.utils.PreferenceManager;

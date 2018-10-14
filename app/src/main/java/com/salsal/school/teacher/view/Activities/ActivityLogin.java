@@ -2,15 +2,16 @@ package com.salsal.school.teacher.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
+import com.salsal.school.teacher.model.UnitAdmins;
 import com.salsal.school.teacher.webservice.APIErrorResult;
 import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.LoginReq;
@@ -81,7 +82,10 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
                 WebServiceHelper.get(ActivityLogin.this).loginUser(loginReq).enqueue(new CallbackHandler<LoginRes>(ActivityLogin.this, true, true) {
                     @Override
                     public void onSuccess(Response<LoginRes> response) {
-                        PreferenceManager.SaveUserProfile(ActivityLogin.this, response.body().getData().getUserId(), response.body().getData().getToken());
+                        getAdminId(response.body().getData().getToken());
+                        PreferenceManager.SaveUserProfile(ActivityLogin.this,
+                                response.body().getData().getUserId(),
+                                response.body().getData().getToken());
                         Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -97,5 +101,19 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
             }
         }
 
+    }
+
+    private void getAdminId(String token) {
+        WebServiceHelper.get(this).getAdmins(token).enqueue(new CallbackHandler<UnitAdmins>(this, true, true) {
+            @Override
+            public void onSuccess(Response<UnitAdmins> response) {
+                PreferenceManager.saveAdminId(ActivityLogin.this, response.body().getData().get(0).getId());
+            }
+
+            @Override
+            public void onFailed(APIErrorResult errorResult) {
+
+            }
+        });
     }
 }

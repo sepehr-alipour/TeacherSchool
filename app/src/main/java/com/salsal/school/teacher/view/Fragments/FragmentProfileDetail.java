@@ -1,8 +1,8 @@
 package com.salsal.school.teacher.view.Fragments;
 
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.AppCompatRatingBar;
+import androidx.core.widget.NestedScrollView;
+import androidx.appcompat.widget.AppCompatRatingBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.salsal.school.teacher.R;
+import com.salsal.school.teacher.utils.Utils;
 import com.salsal.school.teacher.webservice.APIErrorResult;
 import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.TeacherProfileRes;
@@ -92,7 +93,7 @@ public class FragmentProfileDetail extends BaseFragment implements View.OnClickL
                     @Override
                     public void onSuccess(Response<TeacherProfileRes> response) {
                         if (isAdded()) {
-                            txtBirthday.setText(response.body().getData().getBirthDate());
+                            txtBirthday.setText(Utils.convertBirthdayToString(response.body().getData().getBirthDate()));
                             txtEducation.setText(response.body().getData().getEducation());
                             txtEmail.setText(response.body().getData().getEmail());
                             txtMobile.setText(response.body().getData().getPhoneNumber());

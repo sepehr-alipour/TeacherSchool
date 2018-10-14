@@ -25,7 +25,7 @@ public class ActivityReq {
     private int atypeId;
     @SerializedName("expire_date")
     private String expireDate;
-    @SerializedName("file_address")
+    @SerializedName("media_id")
     private String fileAddress;
     @SerializedName("class_id")
     private int classId;

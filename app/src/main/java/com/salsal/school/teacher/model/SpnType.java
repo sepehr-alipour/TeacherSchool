@@ -3,9 +3,9 @@ package com.salsal.school.teacher.model;
 public class SpnType {
 
     String title;
-    String id;
+    int id;
 
-    public SpnType(String title, String id) {
+    public SpnType(String title, int id) {
         this.title = title;
         this.id = id;
     }
@@ -18,11 +18,11 @@ public class SpnType {
         this.title = title;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

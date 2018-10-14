@@ -1,8 +1,7 @@
 package com.salsal.school.teacher.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +35,9 @@ public class AdapterSchedule extends RecyclerView.Adapter<AdapterSchedule.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         ScheduleRes.DataBean itemList = listSchedule.get(position);
-        holder.txtClass.setText(itemList.getClassRoom().getTitle());
-        holder.txtCourse.setText(itemList.getCourse().getTitle());
+        holder.txtClass.setText(itemList.getTitle());
+        //todo get cource title from response
+        holder.txtCourse.setText(itemList.getTitle());
         holder.txtPriority.setText(holder.txtClass.getContext().getResources().getString(R.string.priority, itemList.getPriority()));
         if (position > 0 && itemList.getDayOfWeek() == listSchedule.get(position - 1).getDayOfWeek()) {
             holder.txtDay.setVisibility(View.GONE);

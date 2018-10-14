@@ -41,9 +41,9 @@ public class ClassRes {
          * pivot : {"academic_year_id":2,"class_room_id":1,"created_at":"2018-05-18 14:39:12","updated_at":"2018-05-18 14:39:12","id":1}
          */
 
-        @SerializedName("id")
+        @SerializedName("class_id")
         private int id;
-        @SerializedName("title")
+        @SerializedName("class_name")
         private String title;
         @SerializedName("created_at")
         private String createdAt;

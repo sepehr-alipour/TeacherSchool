@@ -18,6 +18,7 @@ import com.salsal.school.teacher.model.NotificationDetailRes;
 import com.salsal.school.teacher.model.StudentRes;
 import com.salsal.school.teacher.model.TeacherProfileReq;
 import com.salsal.school.teacher.model.TeacherProfileRes;
+import com.salsal.school.teacher.model.UnitAdmins;
 
 import java.util.List;
 
@@ -69,6 +70,10 @@ public interface ApiInterface {
 
     @GET(URL_V1 + "/notification")
     Call<NotificationRes> getNotifications(@Query("token") String token);
+
+    //TODO
+    @GET(URL_V1 + "/unitProfile/getAdmin")
+    Call<UnitAdmins> getAdmins(@Query("token") String token);
 
     @GET(URL_V1 + "/notification/sentBox")
     Call<NotificationRes> getSentBoxNotifications(@Query("token") String token);

@@ -22,8 +22,8 @@ public class SendNotificationReq {
     @SerializedName("message")
     private String message;
     @SerializedName("type")
-    private String type;
-    @SerializedName("file_url")
+    private int type;
+    @SerializedName("media_url")
     private String fileUrl;
     @SerializedName("recipient_type")
     private String recipientType;
@@ -46,11 +46,11 @@ public class SendNotificationReq {
         this.message = message;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 

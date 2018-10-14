@@ -1,19 +1,19 @@
 package com.salsal.school.teacher.view.Activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
-import com.salsal.school.teacher.adapter.AdapterStudents;
+import com.salsal.school.teacher.adapter.AdapterAttendance;
 import com.salsal.school.teacher.webservice.APIErrorResult;
 import com.salsal.school.teacher.webservice.CallbackHandler;
-import com.salsal.school.teacher.interfaces.OnSwitchSelectListener;
+import com.salsal.school.teacher.interfaces.OnStudentAttendencedListener;
 import com.salsal.school.teacher.model.AttendanceReq;
 import com.salsal.school.teacher.model.AttendanceRes;
 import com.salsal.school.teacher.model.StudentRes;
@@ -25,13 +25,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Response;
 
-public class ActivityAttendance extends BaseActivity implements OnSwitchSelectListener {
+public class ActivityAttendance extends BaseActivity implements OnStudentAttendencedListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.list)
     RecyclerView list;
     @BindView(R.id.fabAddNotif)
     FloatingActionButton fabAddNotif;
+    public static final int MODE_ABSENT = 0;
+    public static final int MODE_ALIVE = 1;
+    public static final int MODE_LATE = 2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class ActivityAttendance extends BaseActivity implements OnSwitchSelectLi
                 .enqueue(new CallbackHandler<StudentRes>(this, true, true) {
                     @Override
                     public void onSuccess(Response<StudentRes> response) {
-                        AdapterStudents adapterStudents = new AdapterStudents(response.body().getData(), ActivityAttendance.this);
+                        AdapterAttendance adapterStudents = new AdapterAttendance(response.body().getData(), ActivityAttendance.this);
                         list.setAdapter(adapterStudents);
                     }
 
@@ -60,17 +63,18 @@ public class ActivityAttendance extends BaseActivity implements OnSwitchSelectLi
     }
 
     @Override
-    public void switched(StudentRes.DataBean data, boolean isOn) {
+    public void switched(StudentRes.DataBean data, boolean isAlive, String delay) {
         AttendanceReq attendanceReq = new AttendanceReq();
         attendanceReq.setClassId(PreferenceManager.getTeacherClassId(this));
         attendanceReq.setCourseId(PreferenceManager.getTeacherCourseId(this));
-        attendanceReq.setStatus(isOn ? 1 : 0);
+        attendanceReq.setStatus(isAlive ? 1 : 0);
         attendanceReq.setStudentId(data.getId());
+        attendanceReq.setDelay(delay);
         WebServiceHelper.get(this).attendanceStudent(PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_TOKEN), attendanceReq)
                 .enqueue(new CallbackHandler<AttendanceRes>(ActivityAttendance.this, true, true) {
                     @Override
                     public void onSuccess(Response<AttendanceRes> response) {
-                        Toast.makeText(ActivityAttendance.this, "اطلاعات با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityAttendance.this, R.string.toast_success_saved, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

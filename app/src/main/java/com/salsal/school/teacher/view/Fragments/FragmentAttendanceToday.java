@@ -1,7 +1,5 @@
 package com.salsal.school.teacher.view.Fragments;
 
-import android.support.v4.app.Fragment;
-
 import com.salsal.school.teacher.view.BaseFragment;
 
 /**

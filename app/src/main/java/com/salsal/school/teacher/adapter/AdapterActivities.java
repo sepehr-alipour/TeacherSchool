@@ -1,8 +1,7 @@
 package com.salsal.school.teacher.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,8 @@ import android.widget.TextView;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.interfaces.OnDataSelectListener;
-import com.salsal.school.teacher.interfaces.OnViewClickListener;
 import com.salsal.school.teacher.model.ActivityRes;
+import com.salsal.school.teacher.utils.Utils;
 
 import java.util.List;
 
@@ -39,11 +38,27 @@ public class AdapterActivities extends RecyclerView.Adapter<AdapterActivities.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final ActivityRes.DataBean itemList = listActivity.get(position);
-        holder.txtDate.setText(itemList.getCreatedAt());
+        holder.txtDate.setText(Utils.convertBirthdayToString(itemList.getCreatedAt()));
         holder.txtDesc.setText(itemList.getDesc());
         holder.txtExpireDate.setText(itemList.getExpireDate() + "");
         holder.txtTitle.setText(itemList.getTitle());
-        holder.txtType.setText(itemList.getAtypeId() + "");
+
+        String[] testArray = holder.txtDate.getContext().getResources().getStringArray(R.array.activity_type);
+
+        switch (itemList.getAtypeId()) {
+            case 1:
+                holder.txtType.setText(testArray[0].split("-")[0]);
+                break;
+            case 2:
+                holder.txtType.setText(testArray[1].split("-")[0]);
+                break;
+            case 3:
+                holder.txtType.setText(testArray[2].split("-")[0]);
+                break;
+            case 4:
+                holder.txtType.setText(testArray[3].split("-")[0]);
+                break;
+        }
     }
 
     @Override

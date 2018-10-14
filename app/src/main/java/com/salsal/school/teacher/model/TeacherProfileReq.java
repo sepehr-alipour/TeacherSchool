@@ -14,18 +14,27 @@ public class TeacherProfileReq {
      */
 
     @SerializedName("birth_date")
-    private String birthDate;
+    private long birthDate;
     @SerializedName("email")
     private String email;
     @SerializedName("phone_number")
     private String phoneNumber;
+    @SerializedName("education")
+    private String education;
 
+    public String getEducation() {
+        return education;
+    }
 
-    public String getBirthDate() {
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public long getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(long birthDate) {
         this.birthDate = birthDate;
     }
 

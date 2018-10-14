@@ -58,16 +58,56 @@ public class NotificationRes {
         private String message;
         @SerializedName("type")
         private int type;
-        @SerializedName("file_url")
+        @SerializedName("media_url")
         private String fileUrl;
         @SerializedName("recipient_type")
         private String recipientType;
+        @SerializedName("recipient_name")
+        private String recipientName;
+        @SerializedName("sender_name")
+        private String senderName;
+        @SerializedName("sender_id")
+        private String senderId;
+        @SerializedName("role_title")
+        private String roleTitle;
         @SerializedName("user_id")
         private int userId;
         @SerializedName("created_at")
-        private String createdAt;
+        private int createdAt;
         @SerializedName("updated_at")
         private String updatedAt;
+
+        public String getSenderName() {
+            return senderName;
+        }
+
+        public void setSenderName(String senderName) {
+            this.senderName = senderName;
+        }
+
+        public String getSenderId() {
+            return senderId;
+        }
+
+        public void setSenderId(String senderId) {
+            this.senderId = senderId;
+        }
+
+        public String getRecipientName() {
+            return recipientName;
+        }
+
+        public void setRecipientName(String recipientName) {
+            this.recipientName = recipientName;
+        }
+
+        public String getRoleTitle() {
+            return roleTitle;
+        }
+
+        public void setRoleTitle(String roleTitle) {
+            this.roleTitle = roleTitle;
+        }
 
         public int getId() {
             return id;
@@ -125,11 +165,11 @@ public class NotificationRes {
             this.userId = userId;
         }
 
-        public String getCreatedAt() {
+        public int getCreatedAt() {
             return createdAt;
         }
 
-        public void setCreatedAt(String createdAt) {
+        public void setCreatedAt(int createdAt) {
             this.createdAt = createdAt;
         }
 

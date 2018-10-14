@@ -1,15 +1,15 @@
 package com.salsal.school.teacher.view.Activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -88,7 +88,7 @@ public class ActivityNotificationNew extends BaseActivity implements View.OnClic
         String[] testArray = getResources().getStringArray(R.array.notification_type);
 
         for (int i = 0; i < testArray.length; i++) {
-            notifTypes.add(new SpnType(testArray[i].split("-")[0], testArray[i].split("-")[1]));
+            notifTypes.add(new SpnType(testArray[i].split("-")[0], Integer.parseInt(testArray[i].split("-")[1])));
         }
 
         ArrayAdapter<SpnType> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, notifTypes);
@@ -125,7 +125,7 @@ public class ActivityNotificationNew extends BaseActivity implements View.OnClic
         switch (pos) {
             case 0:
                 List<Integer> users = new ArrayList<>();
-                users.add(24);
+                users.add(PreferenceManager.getAdminId(this));
                 SendNotificationReq sendNotificationReq = new SendNotificationReq();
                 sendNotificationReq.setMessage(edtMessage.getText().toString());
                 sendNotificationReq.setTitle(edtTitle.getText().toString());
@@ -154,7 +154,7 @@ public class ActivityNotificationNew extends BaseActivity implements View.OnClic
                     @Override
                     public void onSuccess(Response<NotificationDetailRes> response) {
 
-                        Toast.makeText(ActivityNotificationNew.this, "پیام شما با موفقیت ارسال شد", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityNotificationNew.this, R.string.toast_success_notif, Toast.LENGTH_SHORT).show();
 
                     }
 

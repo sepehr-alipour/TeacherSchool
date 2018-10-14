@@ -61,7 +61,7 @@ public class ActivityRes {
         @SerializedName("atype_id")
         private int atypeId;
         @SerializedName("created_at")
-        private String createdAt;
+        private long createdAt;
         @SerializedName("updated_at")
         private String updatedAt;
 
@@ -121,11 +121,11 @@ public class ActivityRes {
             this.atypeId = atypeId;
         }
 
-        public String getCreatedAt() {
+        public long getCreatedAt() {
             return createdAt;
         }
 
-        public void setCreatedAt(String createdAt) {
+        public void setCreatedAt(long createdAt) {
             this.createdAt = createdAt;
         }
 

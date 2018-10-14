@@ -13,16 +13,17 @@ public class AttendanceReq {
 
     @SerializedName("student_id")
     private int studentId;
+    @SerializedName("ring_id")
+    private int ringId;
     @SerializedName("course_id")
     private int courseId;
     @SerializedName("class_id")
     private int classId;
     @SerializedName("status")
     private int status;
+    @SerializedName("delay")
+    private String delay;
 
-    public int getStudentId() {
-        return studentId;
-    }
 
     public void setStudentId(int studentId) {
         this.studentId = studentId;
@@ -50,5 +51,14 @@ public class AttendanceReq {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+
+    public String getDelay() {
+        return delay;
+    }
+
+    public void setDelay(String delay) {
+        this.delay = delay;
     }
 }

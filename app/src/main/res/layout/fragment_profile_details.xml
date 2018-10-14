@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.salsal.school.teacher.view.Fragments.FragmentProfileDetail">
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -180,7 +180,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@color/gray_divider" />
 
-                    <android.support.v7.widget.AppCompatRatingBar
+                    <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/ratingBar"
                         style="@style/Base.Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
@@ -193,9 +193,9 @@
 
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

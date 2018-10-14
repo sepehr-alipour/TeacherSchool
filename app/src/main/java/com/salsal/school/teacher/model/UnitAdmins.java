@@ -2,17 +2,20 @@ package com.salsal.school.teacher.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TeacherProfileRes {
+import java.util.List;
+
+public class UnitAdmins {
+
 
     /**
      * msg : ok
-     * data : {"id":2,"education":null,"name":"saeed","birth_date":null,"image_url":"https://pickaface.net/gallery/avatar/unr_paii_180627_0934_vpwcm.png","rate":null,"email":null,"phone_number":null,"national_code":null,"user_id":2,"created_at":"2018-05-23 15:16:00","updated_at":"2018-05-23 15:16:00"}
+     * data : [{"id":1,"education":"کارشناس","name":"Marjorie","birth_date":891220408,"media_id":"https://cdn3.iconfinder.com/data/icons/pretty-office-part-10-shadow-style/512/Teacher-male.png","rate":"4","email":"grimes.aaron@gmail.com","phone_number":"+1.237.565.2579","national_code":"d3211a55-3c2d-3236-99c4-b072b789737c","user_id":23,"is_admin":1,"created_at":"1537463026","updated_at":"1537463026"}]
      */
 
     @SerializedName("msg")
     private String msg;
     @SerializedName("data")
-    private DataBean data;
+    private List<DataBean> data;
 
     public String getMsg() {
         return msg;
@@ -22,28 +25,29 @@ public class TeacherProfileRes {
         this.msg = msg;
     }
 
-    public DataBean getData() {
+    public List<DataBean> getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(List<DataBean> data) {
         this.data = data;
     }
 
     public static class DataBean {
         /**
-         * id : 2
-         * education : null
-         * name : saeed
-         * birth_date : null
-         * image_url : https://pickaface.net/gallery/avatar/unr_paii_180627_0934_vpwcm.png
-         * rate : null
-         * email : null
-         * phone_number : null
-         * national_code : null
-         * user_id : 2
-         * created_at : 2018-05-23 15:16:00
-         * updated_at : 2018-05-23 15:16:00
+         * id : 1
+         * education : کارشناس
+         * name : Marjorie
+         * birth_date : 891220408
+         * media_id : https://cdn3.iconfinder.com/data/icons/pretty-office-part-10-shadow-style/512/Teacher-male.png
+         * rate : 4
+         * email : grimes.aaron@gmail.com
+         * phone_number : +1.237.565.2579
+         * national_code : d3211a55-3c2d-3236-99c4-b072b789737c
+         * user_id : 23
+         * is_admin : 1
+         * created_at : 1537463026
+         * updated_at : 1537463026
          */
 
         @SerializedName("id")
@@ -55,9 +59,9 @@ public class TeacherProfileRes {
         @SerializedName("birth_date")
         private long birthDate;
         @SerializedName("media_id")
-        private String imageUrl;
+        private String mediaId;
         @SerializedName("rate")
-        private float rate;
+        private String rate;
         @SerializedName("email")
         private String email;
         @SerializedName("phone_number")
@@ -66,6 +70,8 @@ public class TeacherProfileRes {
         private String nationalCode;
         @SerializedName("user_id")
         private int userId;
+        @SerializedName("is_admin")
+        private int isAdmin;
         @SerializedName("created_at")
         private String createdAt;
         @SerializedName("updated_at")
@@ -103,19 +109,19 @@ public class TeacherProfileRes {
             this.birthDate = birthDate;
         }
 
-        public String getImageUrl() {
-            return imageUrl;
+        public String getMediaId() {
+            return mediaId;
         }
 
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
+        public void setMediaId(String mediaId) {
+            this.mediaId = mediaId;
         }
 
-        public float getRate() {
+        public String getRate() {
             return rate;
         }
 
-        public void setRate(float rate) {
+        public void setRate(String rate) {
             this.rate = rate;
         }
 
@@ -149,6 +155,14 @@ public class TeacherProfileRes {
 
         public void setUserId(int userId) {
             this.userId = userId;
+        }
+
+        public int getIsAdmin() {
+            return isAdmin;
+        }
+
+        public void setIsAdmin(int isAdmin) {
+            this.isAdmin = isAdmin;
         }
 
         public String getCreatedAt() {

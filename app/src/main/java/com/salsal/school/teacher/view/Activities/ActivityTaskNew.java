@@ -2,15 +2,15 @@ package com.salsal.school.teacher.view.Activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -98,7 +98,7 @@ public class ActivityTaskNew extends BaseActivity implements View.OnClickListene
         String[] testArray = getResources().getStringArray(R.array.activity_type);
 
         for (int i = 0; i < testArray.length; i++) {
-            notifTypes.add(new SpnType(testArray[i].split("-")[0], testArray[i].split("-")[1]));
+            notifTypes.add(new SpnType(testArray[i].split("-")[0], Integer.parseInt(testArray[i].split("-")[1])));
         }
 
         ArrayAdapter<SpnType> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, notifTypes);
@@ -150,7 +150,7 @@ public class ActivityTaskNew extends BaseActivity implements View.OnClickListene
                 .enqueue(new CallbackHandler<ActivityDetailsRes>(ActivityTaskNew.this, true, true) {
                     @Override
                     public void onSuccess(Response<ActivityDetailsRes> response) {
-                        Toast.makeText(ActivityTaskNew.this, "فعالیت با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityTaskNew.this, R.string.toast_success_activity, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -194,19 +194,20 @@ public class ActivityTaskNew extends BaseActivity implements View.OnClickListene
 
     @Override
     public void dataSelected(Object data) {
-        ActivityReq activityReq = new ActivityReq();
+        final ActivityReq activityReq = new ActivityReq();
         activityReq.setClassId(PreferenceManager.getTeacherClassId(ActivityTaskNew.this));
         activityReq.setCourseId(PreferenceManager.getTeacherCourseId(ActivityTaskNew.this));
         activityReq.setDesc(edtDesc.getText().toString());
         activityReq.setTitle(edtTitle.getText().toString());
         activityReq.setExpireDate(txtDate.getText().toString());
         activityReq.setFileAddress("link");
-        activityReq.setAtypeId(1);
-        ArrayList<Integer> users = new ArrayList<>();
+        activityReq.setAtypeId(((SpnType) (spnActivity.getSelectedItem())).getId());
+
+        final ArrayList<Integer> users = new ArrayList<>();
         // activityReq.setAtypeId(((SpnType) (spnActivity.getSelectedItem())).getId());
         if (data instanceof ArrayList) {
             for (int i = 0; i < ((List<StudentRes.DataBean>) data).size(); i++) {
-                users.add(((List<StudentRes.DataBean>) data).get(i).getUserId());
+                users.add(((List<StudentRes.DataBean>) data).get(i).getId());
             }
             activityReq.setUsers(users);
             createActivity(activityReq);
@@ -217,16 +218,6 @@ public class ActivityTaskNew extends BaseActivity implements View.OnClickListene
                     .enqueue(new CallbackHandler<StudentRes>(this, true, true) {
                         @Override
                         public void onSuccess(Response<StudentRes> response) {
-                            ActivityReq activityReq = new ActivityReq();
-                            activityReq.setClassId(PreferenceManager.getTeacherClassId(ActivityTaskNew.this));
-                            activityReq.setCourseId(PreferenceManager.getTeacherCourseId(ActivityTaskNew.this));
-                            activityReq.setDesc(edtDesc.getText().toString());
-                            activityReq.setTitle(edtTitle.getText().toString());
-                            activityReq.setExpireDate(txtDate.getText().toString());
-                            activityReq.setFileAddress("link");
-                            activityReq.setAtypeId(1);
-                            // activityReq.setAtypeId(((SpnType) (spnActivity.getSelectedItem())).getId());
-                            ArrayList<Integer> users = new ArrayList<>();
                             for (int i = 0; i < response.body().getData().size(); i++) {
                                 users.add(response.body().getData().get(i).getUserId());
                             }

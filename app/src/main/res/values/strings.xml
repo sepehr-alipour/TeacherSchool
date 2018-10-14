@@ -22,6 +22,13 @@
     <string name="toast_warning_duplicate_school">این مدرسه قبلا ثبت شده است</string>
     <string name="hello_blank_fragment">profile</string>
     <string name="priority">زنگ %1$d</string>
+    <string name="btn_alive">حاضر</string>
+    <string name="btn_absent">غایب</string>
+    <string name="btn_late">تاخیر</string>
+    <string name="toast_success_saved">اطلاعات با موفقیت ثبت شد</string>
+    <string name="toast_success_notif">اعلان با موفقیت ارسال شد</string>
+    <string name="btn_accept">تایید</string>
+    <string name="toast_success_activity">فعالیت با موفقیت ثبت شد</string>
     <string-array name="notification_type">
         <item>عمومی-1</item>
         <item>دعوتنامه-2</item>

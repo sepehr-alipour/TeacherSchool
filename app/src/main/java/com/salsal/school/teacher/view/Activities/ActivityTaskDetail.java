@@ -1,6 +1,6 @@
 package com.salsal.school.teacher.view.Activities;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.salsal.school.teacher.view.BaseActivity;
 

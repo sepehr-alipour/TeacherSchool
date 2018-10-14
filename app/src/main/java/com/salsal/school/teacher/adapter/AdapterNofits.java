@@ -1,7 +1,7 @@
 package com.salsal.school.teacher.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.interfaces.OnNotifClickListener;
 import com.salsal.school.teacher.model.NotificationRes;
+import com.salsal.school.teacher.utils.Utils;
 
 import java.util.List;
 
@@ -37,9 +38,9 @@ public class AdapterNofits extends RecyclerView.Adapter<AdapterNofits.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final NotificationRes.DataBean itemList = listNotif.get(position);
-        holder.txtDate.setText(itemList.getCreatedAt());
+        holder.txtDate.setText(Utils.convertBirthdayToString(itemList.getCreatedAt()));
         holder.txtDesc.setText(itemList.getMessage());
-        holder.txtSender.setText(itemList.getUserId() + "");
+        holder.txtSender.setText(itemList.getRecipientName() != null ? itemList.getRecipientName() : itemList.getSenderName() + "(" + itemList.getRoleTitle() + ")");
         holder.txtTitle.setText(itemList.getTitle());
         String[] testArray = holder.txtDate.getContext().getResources().getStringArray(R.array.notification_type);
 
@@ -87,7 +88,8 @@ public class AdapterNofits extends RecyclerView.Adapter<AdapterNofits.ViewHolder
 
         @Override
         public void onClick(View v) {
-            notifClickListener.clicked(listNotif.get(getAdapterPosition()));
+            if (listNotif.get(getAdapterPosition()).getRecipientName() == null)
+                notifClickListener.clicked(listNotif.get(getAdapterPosition()));
 
         }
     }

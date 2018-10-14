@@ -1,7 +1,7 @@
 package com.salsal.school.teacher.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.interfaces.OnReceiverClickListener;
 import com.salsal.school.teacher.model.ClassRes;
-import com.salsal.school.teacher.model.StudentRes;
 
 import java.util.List;
 
