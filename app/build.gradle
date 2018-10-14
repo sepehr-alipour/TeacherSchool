@@ -16,7 +16,7 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            resValue "string", "BASE_URL", "school-api.isaan.ir"
+            resValue "string", "BASE_URL", "http://school-api.isaan.ir"
             resValue "string", "SCHOOL_NAME", "test"
             resValue "string", "USER_NAME", "teacher0"
             resValue "string", "PASSWORD", "123"
