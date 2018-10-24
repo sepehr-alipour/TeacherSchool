@@ -24,7 +24,7 @@ public class ActivityReq {
     @SerializedName("atype_id")
     private int atypeId;
     @SerializedName("expire_date")
-    private String expireDate;
+    private long expireDate;
     @SerializedName("media_id")
     private String fileAddress;
     @SerializedName("class_id")
@@ -58,11 +58,11 @@ public class ActivityReq {
         this.atypeId = atypeId;
     }
 
-    public String getExpireDate() {
+    public long getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(String expireDate) {
+    public void setExpireDate(long expireDate) {
         this.expireDate = expireDate;
     }
 

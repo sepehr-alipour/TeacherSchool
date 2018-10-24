@@ -2,6 +2,7 @@ package com.salsal.school.teacher.view.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -9,14 +10,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +30,9 @@ import android.widget.TextView;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.model.TeacherProfileRes;
-import com.salsal.school.teacher.view.Activities.ActivityAddSchool;
 import com.salsal.school.teacher.view.Activities.ActivityEditProfile;
 import com.salsal.school.teacher.view.Activities.ActivityLogin;
+import com.salsal.school.teacher.view.Activities.ActivitySchools;
 import com.salsal.school.teacher.view.BaseFragment;
 
 import java.util.ArrayList;
@@ -99,7 +105,7 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(FragmentProfileDetail.newInstance("", ""), "مشخصات کلی");
         adapter.addFrag(FragmentProfileSchedule.newInstance("", ""), "برنامه هفتگی");
-        adapter.addFrag(ActivityAddSchool.newInstance("", ""), "لیست مدارس");
+        adapter.addFrag(FragmentAddSchool.newInstance("", ""), "لیست مدارس");
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -111,16 +117,18 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        fabEdit.show();
-                        fabEdit.setImageResource(R.drawable.ic_action_edit);
+                        fabEdit.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_edit));
+                        if (!fabEdit.isShown())
+                            fabEdit.show();
                         break;
                     case 1:
                         fabEdit.hide();
 
                         break;
                     case 2:
-                        fabEdit.show();
-                        fabEdit.setImageResource(R.drawable.ic_action_add);
+                        fabEdit.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_add));
+                        if (!fabEdit.isShown())
+                            fabEdit.show();
                         break;
                 }
             }
@@ -153,7 +161,7 @@ public class FragmentProfile extends BaseFragment implements View.OnClickListene
                 break;
             case 2:
 
-                Intent intent = new Intent(getContext(), ActivityLogin.class);
+                Intent intent = new Intent(getContext(), ActivitySchools.class);
                 startActivity(intent);
                 break;
 

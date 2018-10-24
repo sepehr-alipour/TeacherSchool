@@ -43,7 +43,7 @@ public class ActivityLoading extends BaseActivity {
 
     @Override
     public void finish() {
-        super.finish();
         instance = null;
+        super.finish();
     }
 }

@@ -16,7 +16,7 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            resValue "string", "BASE_URL", "http://school-api.isaan.ir"
+            resValue "string", "BASE_URL", "http://school-api.isaan.ir:8080"
             resValue "string", "SCHOOL_NAME", "test"
             resValue "string", "USER_NAME", "teacher0"
             resValue "string", "PASSWORD", "123"
@@ -34,7 +34,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     //todo update to new version
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -50,6 +50,6 @@ dependencies {
     implementation "com.orhanobut:hawk:2.0.1"
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     //todo update to new version
-    implementation 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
+    implementation 'com.jakewharton:butterknife:9.0.0-rc1'
     compile project(path: ':persiandatepicker')
 }

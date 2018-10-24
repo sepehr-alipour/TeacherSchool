@@ -2,6 +2,7 @@ package com.salsal.school.teacher.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class AdapterNofits extends RecyclerView.Adapter<AdapterNofits.ViewHolder
         holder.txtDesc.setText(itemList.getMessage());
         holder.txtSender.setText(itemList.getRecipientName() != null ? itemList.getRecipientName() : itemList.getSenderName() + "(" + itemList.getRoleTitle() + ")");
         holder.txtTitle.setText(itemList.getTitle());
-        String[] testArray = holder.txtDate.getContext().getResources().getStringArray(R.array.notification_type);
+        String[] testArray = holder.txtType.getContext().getResources().getStringArray(R.array.notification_type);
 
         switch (itemList.getType()) {
             case 1:

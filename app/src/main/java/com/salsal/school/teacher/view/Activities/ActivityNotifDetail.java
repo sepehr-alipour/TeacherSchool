@@ -1,15 +1,18 @@
 package com.salsal.school.teacher.view.Activities;
 
 import android.os.Bundle;
+
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.model.SendNotificationReq;
+import com.salsal.school.teacher.utils.Utils;
 import com.salsal.school.teacher.webservice.APIErrorResult;
 import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.NotificationDetailRes;
@@ -55,19 +58,30 @@ public class ActivityNotifDetail extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_notif_detail);
         ButterKnife.bind(this);
         btnSend.setOnClickListener(this);
-        notifId = getIntent().getIntExtra(INTENT_NOTIF_ID, 0);
+        notifId = getIntent().getIntExtra(INTENT_NOTIF_ID, -1);
         token = PreferenceManager.getUserProfile(this).get(PreferenceManager.PREF_TOKEN);
 
         WebServiceHelper.get(this).getNotificationDetails(notifId, token)
                 .enqueue(new CallbackHandler<NotificationDetailRes>(this, true, true) {
                     @Override
                     public void onSuccess(Response<NotificationDetailRes> response) {
-                        notifDetail = response.body().getData();
-                        txtDate.setText(response.body().getData().getCreatedAt());
-                        txtDesc.setText(response.body().getData().getMessage());
-                        txtSender.setText(response.body().getData().getId() + "");
-                        txtTitle.setText(response.body().getData().getTitle());
-                        txtType.setText(response.body().getData().getType() + "");
+                        notifDetail = response.body().getData().get(0);
+                        txtDate.setText(Utils.convertBirthdayToString(notifDetail.getCreatedAt()));
+                        txtDesc.setText(notifDetail.getMessage());
+                        txtSender.setText(notifDetail.getSenderName() + "(" + notifDetail.getRoleTitle() + ")");
+                        txtTitle.setText(notifDetail.getTitle());
+                        txtType.setText(notifDetail.getType() + "");
+                        String[] testArray = txtType.getContext().getResources().getStringArray(R.array.notification_type);
+
+                        switch (notifDetail.getType()) {
+                            case 1:
+                                txtType.setText(testArray[0].split("-")[0]);
+                                break;
+                            case 2:
+                                txtType.setText(testArray[1].split("-")[0]);
+                                break;
+                        }
+
                     }
 
                     @Override
@@ -80,7 +94,7 @@ public class ActivityNotifDetail extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         List<Integer> userId = new ArrayList<>();
-        userId.add(notifDetail.getUserId());
+        userId.add(notifDetail.getSenderId());
         SendNotificationReq notificationReq = new SendNotificationReq();
         notificationReq.setMessage(edtResponse.getText().toString());
         notificationReq.setRecipientType(notifDetail.getRecipientType());

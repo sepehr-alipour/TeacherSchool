@@ -26,8 +26,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="left|center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="@dimen/space_30_dp"
+                android:layout_marginBottom="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_action_profile"
                 app:civ_border_color="@color/colorPrimaryDark"
@@ -79,14 +79,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabEdit"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_gravity="bottom|left"
         android:layout_margin="@dimen/space_10_dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_action_edit"
-        android:visibility="visible"
-        app:fabSize="normal" />
+        app:srcCompat="@drawable/ic_action_edit" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

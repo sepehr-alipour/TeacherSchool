@@ -1,4 +1,4 @@
-package com.salsal.school.teacher.view.Activities;
+package com.salsal.school.teacher.view.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterSchools;
+import com.salsal.school.teacher.view.Activities.ActivityLogin;
 import com.salsal.school.teacher.webservice.APIErrorResult;
 import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.interfaces.OnDataSelectListener;
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import retrofit2.Response;
 
-public class ActivityAddSchool extends BaseFragment implements OnDataSelectListener {
+public class FragmentAddSchool extends BaseFragment implements OnDataSelectListener {
 
     @BindView(R.id.list)
     RecyclerView list;
@@ -39,8 +40,8 @@ public class ActivityAddSchool extends BaseFragment implements OnDataSelectListe
     private ArrayList<LoginReq> schools;
     public static final String INTENT_KEY_SCHOOL_ID = "school_id";
 
-    public static ActivityAddSchool newInstance(String param1, String param2) {
-        ActivityAddSchool fragment = new ActivityAddSchool();
+    public static FragmentAddSchool newInstance(String param1, String param2) {
+        FragmentAddSchool fragment = new FragmentAddSchool();
         Bundle args = new Bundle();
         args.putString("param1", param1);
         args.putString("param2", param2);
@@ -73,7 +74,7 @@ public class ActivityAddSchool extends BaseFragment implements OnDataSelectListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        list.setAdapter(new AdapterSchools(PreferenceManager.getSchoolConnections(), ActivityAddSchool.this));
+        list.setAdapter(new AdapterSchools(PreferenceManager.getSchoolConnections(), FragmentAddSchool.this));
         list.invalidate();
     }
 
@@ -90,7 +91,7 @@ public class ActivityAddSchool extends BaseFragment implements OnDataSelectListe
                         ((LoginReq) data).setChecked(true);
                         PreferenceManager.addSchoolConnection((LoginReq) data);
                         PreferenceManager.SaveUserProfile(getContext(), response.body().getData().getUserId(), response.body().getData().getToken());
-                        list.setAdapter(new AdapterSchools(PreferenceManager.getSchoolConnections(), ActivityAddSchool.this));
+                        list.setAdapter(new AdapterSchools(PreferenceManager.getSchoolConnections(), FragmentAddSchool.this));
                         list.invalidate();
 
                     }

@@ -2,12 +2,14 @@ package com.salsal.school.teacher.webservice;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.view.Activities.ActivityLoading;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,10 +48,16 @@ public abstract class CallbackHandler<T> implements Callback<T> {
         //MessageBox.HideLoading(context);
 
         if (response.isSuccessful() && response.body() != null) {
-            onSuccess(response);
-            if (ActivityLoading.instance != null) {
-                ActivityLoading.instance.finish();
-            }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (ActivityLoading.instance != null) {
+                        ActivityLoading.instance.finish();
+                    }
+                    onSuccess(response);
+                }
+            }, 500);
+
         } else {
             APIErrorResult apiErrorResult = null;
             try {

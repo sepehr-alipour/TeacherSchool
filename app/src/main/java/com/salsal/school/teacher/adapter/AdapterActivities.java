@@ -40,7 +40,7 @@ public class AdapterActivities extends RecyclerView.Adapter<AdapterActivities.Vi
         final ActivityRes.DataBean itemList = listActivity.get(position);
         holder.txtDate.setText(Utils.convertBirthdayToString(itemList.getCreatedAt()));
         holder.txtDesc.setText(itemList.getDesc());
-        holder.txtExpireDate.setText(itemList.getExpireDate() + "");
+        holder.txtExpireDate.setText(Utils.convertBirthdayToString(itemList.getExpireDate()));
         holder.txtTitle.setText(itemList.getTitle());
 
         String[] testArray = holder.txtDate.getContext().getResources().getStringArray(R.array.activity_type);

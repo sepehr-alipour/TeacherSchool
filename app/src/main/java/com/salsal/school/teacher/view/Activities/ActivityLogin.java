@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.model.UnitAdmins;
+import com.salsal.school.teacher.view.Fragments.FragmentAddSchool;
 import com.salsal.school.teacher.webservice.APIErrorResult;
 import com.salsal.school.teacher.webservice.CallbackHandler;
 import com.salsal.school.teacher.model.LoginReq;
@@ -46,7 +47,7 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
         ButterKnife.bind(this);
         btnLogin.setOnClickListener(this);
 
-        LoginReq schoolConnection = PreferenceManager.getSchoolConnection(getIntent().getIntExtra(ActivityAddSchool.INTENT_KEY_SCHOOL_ID, -1));
+        LoginReq schoolConnection = PreferenceManager.getSchoolConnection(getIntent().getIntExtra(FragmentAddSchool.INTENT_KEY_SCHOOL_ID, -1));
         if (schoolConnection != null) {
             inEdit = true;
             edtPassword.setText(schoolConnection.getPassword());
@@ -68,7 +69,7 @@ public class ActivityLogin extends BaseActivity implements View.OnClickListener 
             loginReq.setUsername(edtUsername.getText().toString());
             loginReq.setPassword(edtPassword.getText().toString());
             if (inEdit) {
-                int id = getIntent().getIntExtra(ActivityAddSchool.INTENT_KEY_SCHOOL_ID, -1);
+                int id = getIntent().getIntExtra(FragmentAddSchool.INTENT_KEY_SCHOOL_ID, -1);
                 loginReq.setId(PreferenceManager.getSchoolConnection(id).getId());
                 loginReq.setChecked(PreferenceManager.getSchoolConnection(id).isChecked());
                 PreferenceManager.updateSchoolConnection(loginReq);

@@ -55,7 +55,7 @@ public class ActivityRes {
         @SerializedName("desc")
         private String desc;
         @SerializedName("expire_date")
-        private String expireDate;
+        private long expireDate;
         @SerializedName("file_address")
         private String fileAddress;
         @SerializedName("atype_id")
@@ -97,11 +97,11 @@ public class ActivityRes {
             this.desc = desc;
         }
 
-        public String getExpireDate() {
+        public long getExpireDate() {
             return expireDate;
         }
 
-        public void setExpireDate(String expireDate) {
+        public void setExpireDate(long expireDate) {
             this.expireDate = expireDate;
         }
 

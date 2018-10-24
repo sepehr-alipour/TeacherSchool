@@ -3,7 +3,6 @@ package com.salsal.school.teacher.view.Activities;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatSpinner;
@@ -18,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.salsal.school.teacher.R;
 import com.salsal.school.teacher.adapter.AdapterReceiverMessage;
 import com.salsal.school.teacher.webservice.APIErrorResult;
@@ -135,6 +135,8 @@ public class ActivityTaskNew extends BaseActivity implements View.OnClickListene
     @Override
     public void onDateSelected(PersianCalendar persianCalendar) {
         txtDate.setText(persianCalendar.getPersianYear() + "/" + persianCalendar.getPersianMonth() + "/" + persianCalendar.getPersianDay());
+        txtDate.setTag(persianCalendar.getTimeInMillis()/1000);
+
         // timestamp = new Timestamp(persianCalendar.getTimeInMillis() / 1000);
     }
 
@@ -199,7 +201,7 @@ public class ActivityTaskNew extends BaseActivity implements View.OnClickListene
         activityReq.setCourseId(PreferenceManager.getTeacherCourseId(ActivityTaskNew.this));
         activityReq.setDesc(edtDesc.getText().toString());
         activityReq.setTitle(edtTitle.getText().toString());
-        activityReq.setExpireDate(txtDate.getText().toString());
+        activityReq.setExpireDate((Long) txtDate.getTag());
         activityReq.setFileAddress("link");
         activityReq.setAtypeId(((SpnType) (spnActivity.getSelectedItem())).getId());
 
